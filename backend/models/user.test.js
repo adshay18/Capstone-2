@@ -23,6 +23,7 @@ describe('verify user', function() {
 			await User.verify('DNE', 'password');
 		} catch (e) {
 			expect(e instanceof NotFoundError).toBeTruthy();
+			expect(e.message).toEqual('Username not found.');
 		}
 	});
 
@@ -31,6 +32,32 @@ describe('verify user', function() {
 			await User.verify('Test2', 'testpass1');
 		} catch (e) {
 			expect(e instanceof BadRequestError).toBeTruthy();
+			expect(e.message).toEqual('Incorrect password.');
+		}
+	});
+});
+
+// User registration
+
+describe('register new user', function() {
+	test('works', async function() {
+		const user = await User.register('Test4', 'testpass4', 'test', 'four', 'test.4@gmail.com', 3);
+		expect(user).toEqual({
+			username: 'Test4',
+			firstName: 'test',
+			lastName: 'four',
+			email: 'test.4@gmail.com',
+			age: 3,
+			completedTasks: 0
+		});
+	});
+
+	test('Bad request for username already in use', async function() {
+		try {
+			await User.register('Test1', 'testpass4', 'test', 'four', 'test.4@gmail.com', 3);
+		} catch (e) {
+			expect(e instanceof BadRequestError).toBeTruthy();
+			expect(e.message).toEqual('Username: Test1 is already in use, please pick a different username.');
 		}
 	});
 });
