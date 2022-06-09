@@ -49,6 +49,23 @@ class Task {
 		return task;
 	}
 
+	// Get all tasks associated with a user
+	// Returning [{taskId, username, description, completed}...]
+	static async getAllForUser(username) {
+		const userCheck = await db.query(`SELECT * FROM users WHERE username = $1`, [ username ]);
+		if (!userCheck.rows[0]) throw new NotFoundError('Username not found');
+
+		const result = await db.query(
+			`
+        SELECT task_id AS 'taskId', username, description, completed FROM tasks
+        WHERE username = $1
+        ORDER BY task_id`,
+			[ username ]
+		);
+
+		return result.rows;
+	}
+
 	// Remove a task from user's list
 	// Returns {deleted: taskId}
 
