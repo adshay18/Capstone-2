@@ -62,7 +62,7 @@ describe('register new user', function() {
 	});
 });
 
-// Get user by username
+// Get
 
 describe('find users by username', function() {
 	test('works', async function() {
@@ -85,6 +85,75 @@ describe('find users by username', function() {
 			expect(e instanceof NotFoundError).toBeTruthy();
 			expect(e.status).toEqual(404);
 			expect(e.message).toEqual('No user: Wrong_Username');
+		}
+	});
+});
+
+// Update
+
+describe('accepts partial update for a user', function() {
+	test('verifies user data has changed in db', async function() {
+		const user = await User.get('Test3');
+		expect(user).toEqual({
+			username: 'Test3',
+			firstName: 'test',
+			lastName: 'three',
+			email: 'test.3@gmail.com',
+			age: 15,
+			completedTasks: 0,
+			avatar: null
+		});
+		await User.update('Test3', { completedTasks: 1, avatar: 'URL' });
+		const updatedUser = await User.get('Test3');
+		expect(updatedUser).toEqual({
+			username: 'Test3',
+			firstName: 'test',
+			lastName: 'three',
+			email: 'test.3@gmail.com',
+			age: 15,
+			completedTasks: 1,
+			avatar: 'URL'
+		});
+	});
+
+	test('404 if not found', async function() {
+		try {
+			await User.update('Wrong_Username', { completedTasks: 25 });
+		} catch (e) {
+			expect(e instanceof NotFoundError).toBeTruthy();
+			expect(e.status).toEqual(404);
+			expect(e.message).toEqual('No user found named Wrong_Username');
+		}
+	});
+});
+
+// Deletion
+
+describe('deletes user from db', function() {
+	test('user no longer exists after deletion', async function() {
+		const user = await User.get('Test2');
+		expect(user.email).toEqual('test.2@gmail.com');
+		await User.remove('Test2');
+		try {
+			await User.get('Test2');
+		} catch (e) {
+			expect(e instanceof NotFoundError).toBeTruthy();
+			expect(e.message).toEqual('No user: Test2');
+		}
+	});
+
+	test('responds with deletion message', async function() {
+		const res = await User.remove('Test1');
+		expect(res).toEqual({ deleted: 'Test1' });
+	});
+
+	test('404 if not found', async function() {
+		try {
+			await User.remove('Wrong_Username', { completedTasks: 25 });
+		} catch (e) {
+			expect(e instanceof NotFoundError).toBeTruthy();
+			expect(e.status).toEqual(404);
+			expect(e.message).toEqual('No user found named Wrong_Username');
 		}
 	});
 });
