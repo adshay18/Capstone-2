@@ -57,7 +57,7 @@ class Task {
 
 		const result = await db.query(
 			`
-        SELECT task_id AS 'taskId', username, description, completed FROM tasks
+        SELECT task_id AS "taskId", username, description, completed FROM tasks
         WHERE username = $1
         ORDER BY task_id`,
 			[ username ]
