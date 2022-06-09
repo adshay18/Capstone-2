@@ -61,3 +61,30 @@ describe('register new user', function() {
 		}
 	});
 });
+
+// Get user by username
+
+describe('find users by username', function() {
+	test('works', async function() {
+		const user = await User.get('Test3');
+		expect(user).toEqual({
+			username: 'Test3',
+			firstName: 'test',
+			lastName: 'three',
+			email: 'test.3@gmail.com',
+			age: 15,
+			completedTasks: 0,
+			avatar: null
+		});
+	});
+
+	test('404 if not found', async function() {
+		try {
+			await User.get('Wrong_Username');
+		} catch (e) {
+			expect(e instanceof NotFoundError).toBeTruthy();
+			expect(e.status).toEqual(404);
+			expect(e.message).toEqual('No user: Wrong_Username');
+		}
+	});
+});
