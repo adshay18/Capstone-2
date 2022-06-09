@@ -2,9 +2,17 @@ const bcrypt = require('bcrypt');
 const db = require('../db');
 const { BCRYPT_WORK_FACTOR } = require('../config');
 
+// sample task descriptions
+const taskDescriptions = {
+	videoGames: 'Play a video game with at least one friend.',
+	hike: 'Go on a hike that is 2 miles long!',
+	cooking: 'Make a meal with chicken, asparagus, and rice.'
+};
+
 async function beforeAllTests() {
 	// Empty test database
 	await db.query('DELETE FROM users');
+	await db.query('DELETE FROM tasks');
 	// Fill with user data
 	await db.query(
 		`
@@ -16,6 +24,26 @@ async function beforeAllTests() {
 			await bcrypt.hash('testpass1', BCRYPT_WORK_FACTOR),
 			await bcrypt.hash('testpass2', BCRYPT_WORK_FACTOR),
 			await bcrypt.hash('testpass3', BCRYPT_WORK_FACTOR)
+		]
+	);
+	// Add tasks for users
+	await db.query(
+		`
+        INSERT INTO tasks(username, description)
+        VALUES  ('Test1', $1),
+                ('Test1', $2),
+                ('Test2', $3),
+                ('Test2', $4),
+                ('Test2', $5),
+                ('Test3', $6),
+                `,
+		[
+			taskDescriptions.videoGames,
+			taskDescriptions.hike,
+			taskDescriptions.videoGames,
+			taskDescriptions.hike,
+			taskDescriptions.cooking,
+			taskDescriptions.cooking
 		]
 	);
 }
