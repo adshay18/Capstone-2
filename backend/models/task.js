@@ -74,13 +74,14 @@ class Task {
 		const result = await db.query(
 			`
         DELETE FROM tasks
-        WHERE task_id = $1`,
+        WHERE task_id = $1
+        RETURNING task_id AS "taskId"`,
 			[ taskId ]
 		);
 
 		const deletedTask = result.rows[0];
 		if (!deletedTask) throw new NotFoundError(`Task not found with ID: ${taskId}`);
-		return { delted: taskId };
+		return { deleted: taskId };
 	}
 }
 
