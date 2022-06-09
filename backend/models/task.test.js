@@ -79,3 +79,40 @@ describe('add a new task to db', function() {
 		}
 	});
 });
+
+// Mark complete
+
+describe('mark task as complete', function() {
+	test('works', async function() {
+		//get id to use
+		const tasks = await Task.getAllForUser('Test3');
+		const testId = tasks[0].taskId;
+
+		const update = await Task.markComplete(testId);
+		expect(update).toEqual({
+			taskId: testId,
+			username: 'Test3',
+			description: 'Make a meal with chicken, asparagus, and rice.',
+			completed: true
+		});
+
+		const updatedTasks = await Task.getAllForUser('Test3');
+		expect(updatedTasks).toEqual([
+			{
+				taskId: testId,
+				username: 'Test3',
+				description: 'Make a meal with chicken, asparagus, and rice.',
+				completed: true
+			}
+		]);
+	});
+
+	test('404 for id not found', async function() {
+		try {
+			await Task.markComplete(0);
+		} catch (e) {
+			expect(e instanceof NotFoundError).toBeTruthy();
+			expect(e.status).toBe(404);
+		}
+	});
+});

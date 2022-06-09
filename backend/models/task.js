@@ -40,7 +40,7 @@ class Task {
         UPDATE tasks
         SET completed = true
         WHERE task_id = $1
-        RETURNING *`,
+        RETURNING task_id AS "taskId", username, description, completed`,
 			[ taskId ]
 		);
 
