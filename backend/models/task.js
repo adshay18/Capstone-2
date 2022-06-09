@@ -28,6 +28,7 @@ class Task {
 		);
 
 		const task = result.rows[0];
+		if (!task) throw new NotFoundError('Username not found');
 		return task;
 	}
 
