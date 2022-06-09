@@ -14,7 +14,8 @@ CREATE TABLE tasks (
     task_id SERIAL PRIMARY KEY,
     username VARCHAR(25) NOT NULL
         REFERENCES users ON DELETE CASCADE,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    completed BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE badges (
