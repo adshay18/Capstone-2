@@ -29,14 +29,14 @@ async function beforeAllTests() {
 	// Add tasks for users
 	await db.query(
 		`
-        INSERT INTO tasks(username, description)
-        VALUES  ('Test1', $1),
-                ('Test1', $2),
-                ('Test2', $3),
-                ('Test2', $4),
-                ('Test2', $5),
-                ('Test3', $6),
-                `,
+	    INSERT INTO tasks(username, description)
+	    VALUES  ('Test1', $1),
+	            ('Test1', $2),
+	            ('Test2', $3),
+	            ('Test2', $4),
+	            ('Test2', $5),
+	            ('Test3', $6)
+	            `,
 		[
 			taskDescriptions.videoGames,
 			taskDescriptions.hike,
