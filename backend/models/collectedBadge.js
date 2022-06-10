@@ -15,16 +15,19 @@ class CollectedBadge {
 		);
 		if (duplicateCheck.rows[0]) throw new BadRequestError('User has already collected this badge.');
 
-		const result = await db.query(
-			`
+		try {
+			const result = await db.query(
+				`
         INSERT INTO collected_badges (username, badge_id)
-        VALUES ($1, $2)`,
-			[ username, badgeId ]
-		);
+        VALUES ($1, $2)
+        RETURNING *`,
+				[ username, badgeId ]
+			);
 
-		const badge = result.rows[0];
-		if (!badge) throw new NotFoundError('Username or badgeID not found.');
-		return badge;
+			return result.rows[0];
+		} catch (e) {
+			throw new NotFoundError('Username or badgeId not found.');
+		}
 	}
 
 	// Get a list of all badges a user has earned
