@@ -73,7 +73,7 @@ describe('find users by username', function() {
 			lastName: 'three',
 			email: 'test.3@gmail.com',
 			age: 15,
-			completedTasks: 0,
+			completedTasks: 504,
 			avatar: null
 		});
 	});
@@ -100,10 +100,10 @@ describe('accepts partial update for a user', function() {
 			lastName: 'three',
 			email: 'test.3@gmail.com',
 			age: 15,
-			completedTasks: 0,
+			completedTasks: 504,
 			avatar: null
 		});
-		await User.update('Test3', { completedTasks: 1, avatar: 'URL' });
+		await User.update('Test3', { completedTasks: 505, avatar: 'URL' });
 		const updatedUser = await User.get('Test3');
 		expect(updatedUser).toEqual({
 			username: 'Test3',
@@ -111,7 +111,7 @@ describe('accepts partial update for a user', function() {
 			lastName: 'three',
 			email: 'test.3@gmail.com',
 			age: 15,
-			completedTasks: 1,
+			completedTasks: 505,
 			avatar: 'URL'
 		});
 	});
