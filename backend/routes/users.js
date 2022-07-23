@@ -10,6 +10,7 @@ const User = require('../models/user');
 const userNewSchema = require('../schemas/userNewSchema.json');
 const userUpdateSchema = require('../schemas/userUpdateSchema.json');
 const userLoginSchema = require('../schemas/userLoginSchema.json');
+const { ensureCorrectUser } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -71,6 +72,48 @@ router.post('/token', async function(req, res, next) {
 		const user = await User.verify(username, password);
 		const token = createToken(user);
 		return res.json({ token });
+	} catch (err) {
+		return next(err);
+	}
+});
+
+/** GET /[username] => { user }
+ *
+ * Returns { username, firstName, lastName, email, age, completedTasks, avatar }
+ *   where completedTasks is { ... FILL THIS IN }
+ *
+ * Authorization required: none
+ **/
+
+router.get('/:username', async function(req, res, next) {
+	try {
+		const user = await User.get(req.params.username);
+		return res.json({ user });
+	} catch (err) {
+		return next(err);
+	}
+});
+
+/** PATCH /[username] { user } => { user }
+ *
+ * Data can include:
+ *   { firstName, lastName, password, email, age, avatar, completedTasks}
+ *
+ * Returns { username, firstName, lastName, email, age, avatar, completedTasks }
+ *
+ * Authorization required: same-user-as-:username
+ **/
+
+router.patch('/:username', ensureCorrectUser, async function(req, res, next) {
+	try {
+		const validator = jsonschema.validate(req.body, userUpdateSchema);
+		if (!validator.valid) {
+			const errs = validator.errors.map((e) => e.stack);
+			throw new BadRequestError(errs);
+		}
+
+		const user = await User.update(req.params.username, req.body);
+		return res.json({ user });
 	} catch (err) {
 		return next(err);
 	}
