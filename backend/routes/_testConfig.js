@@ -1,5 +1,6 @@
 const db = require('../db.js');
 const User = require('../models/user.js');
+const { createToken } = require('./helpers');
 
 async function commonBeforeAll() {
 	// noinspection SqlWithoutWhere
