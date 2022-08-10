@@ -14,20 +14,7 @@ const { ensureCorrectUser } = require('../middleware/auth');
 
 const router = express.Router();
 
-const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = require('../config');
-
-/** return signed JWT from user data. */
-
-function createToken(user) {
-	let payload = {
-		username: user.username,
-		completedTasks: user.completedTasks,
-		avatar: user.avatar
-	};
-
-	return jwt.sign(payload, SECRET_KEY);
-}
+const { createToken } = require('./helpers.js');
 
 /** POST /users:   { user } => { token }
  *
@@ -119,4 +106,17 @@ router.patch('/:username', ensureCorrectUser, async function(req, res, next) {
 	}
 });
 
+/** DELETE /[username]  =>  { deleted: username }
+ *
+ * Authorization required: same-user-as-:username
+ **/
+
+router.delete('/:username', ensureCorrectUser, async function(req, res, next) {
+	try {
+		await User.remove(req.params.username);
+		return res.json({ deleted: req.params.username });
+	} catch (err) {
+		return next(err);
+	}
+});
 module.exports = router;
