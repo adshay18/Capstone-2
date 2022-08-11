@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const { NotFoundError } = require('./expressError');
 const { authenticateJWT } = require('./middleware/auth');
+const usersRoutes = require('./routes/users');
 
 // Init app
 const app = express();
@@ -13,8 +14,7 @@ app.use(cors());
 app.use(express.json());
 // authenticate users before all routes
 app.use(authenticateJWT);
-
-//NEED TO CREATE AND INCLUDE ROUTES - needs models done first
+app.use('/users', usersRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function(req, res, next) {

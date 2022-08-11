@@ -46,6 +46,11 @@ class User {
 			throw new BadRequestError(`Username: ${username} is already in use, please pick a different username.`);
 		}
 
+		console.log('*************');
+		console.log('*************');
+		console.log('*************');
+		console.log('password:', username, 'BWF', BCRYPT_WORK_FACTOR);
+
 		const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
 		const result = await db.query(
