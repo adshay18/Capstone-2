@@ -17,9 +17,15 @@ class BadRequestError extends ExpressError {
 		super(message, 400);
 	}
 }
+class UnauthorizedError extends ExpressError {
+	constructor(message = 'Unauthorized') {
+		super(message, 400);
+	}
+}
 
 module.exports = {
 	ExpressError,
 	NotFoundError,
-	BadRequestError
+	BadRequestError,
+	UnauthorizedError
 };

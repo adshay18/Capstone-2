@@ -6,7 +6,15 @@ const db = require('../db.js');
 const app = require('../app');
 const User = require('../models/user');
 
-const { commonBeforeAll, commonBeforeEach, commonAfterEach, commonAfterAll } = require('./_testConfig');
+const {
+	commonBeforeAll,
+	commonBeforeEach,
+	commonAfterEach,
+	commonAfterAll,
+	u1Token,
+	u2Token,
+	u3Token
+} = require('./_testConfig');
 
 beforeAll(commonBeforeAll);
 beforeEach(commonBeforeEach);
@@ -87,5 +95,36 @@ describe('GET /users/:username', function() {
 	test('404 user not found', async function() {
 		const res = await request(app).get('/users/notausername');
 		expect(res.statusCode).toEqual(404);
+	});
+});
+
+/************** PATCH /users/username */
+
+describe('PATCH /users/:username', function() {
+	test('works', async function() {
+		const res = await request(app)
+			.patch('/users/u2')
+			.send({ completedTasks: 1 })
+			.set('authorization', `Bearer ${u2Token}`);
+		expect(res.statusCode).toEqual(200);
+	});
+
+	test('fails for incorrect user', async function() {
+		const res = await request(app).patch('/users/u2').send({ age: 13 }).set('authorization', `Bearer ${u3Token}`);
+		expect(res.statusCode).toEqual(400);
+	});
+});
+
+/************** DELETE /users/username */
+
+describe('DELETE /users/:username', function() {
+	test('works', async function() {
+		const res = await request(app).delete('/users/u2').set('authorization', `Bearer ${u2Token}`);
+		expect(res.statusCode).toEqual(200);
+	});
+
+	test('fails for incorrect user', async function() {
+		const res = await request(app).delete('/users/u2').set('authorization', `Bearer ${u3Token}`);
+		expect(res.statusCode).toEqual(400);
 	});
 });
