@@ -11,11 +11,11 @@ CREATE TABLE users (
 );
 
 CREATE TABLE tasks (
-    task_id SERIAL PRIMARY KEY,
+    task_id SERIAL,
     username VARCHAR(25) NOT NULL
         REFERENCES users ON DELETE CASCADE,
-    description TEXT NOT NULL,
-    completed BOOLEAN NOT NULL DEFAULT false
+    completed BOOLEAN NOT NULL DEFAULT false,
+    PRIMARY KEY (task_id, username)
 );
 
 CREATE TABLE badges (
