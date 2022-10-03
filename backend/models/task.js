@@ -5,60 +5,63 @@ const { NotFoundError, BadRequestError } = require('../expressError');
 
 class Task {
 	// Add a new task associated to a user
-	// Returns {task_id, username, description, completed}
-	static async add(username, description) {
+	// Returns {task_id, username, completed}
+
+	static async add(username, key) {
+		const userCheck = await db.query(
+			`SELECT username
+           FROM users
+           WHERE username = $1`,
+			[ username ]
+		);
+		const user = userCheck.rows[0];
+
+		if (!user) throw new NotFoundError(`No username: ${username}`);
+
 		const duplicateCheck = await db.query(
 			`SELECT * FROM tasks
-            WHERE username = $1 AND description = $2
-            `,
-			[ username, description ]
+			 WHERE username = $1 AND task_id = $2`,
+			[ username, key ]
 		);
 
-		if (duplicateCheck.rows[0]) {
-			throw new BadRequestError(`User already has task in their list`);
-		}
+		const duplicate = duplicateCheck.rows[0];
+		if (duplicate) throw new BadRequestError(`${username} already has task.`);
 
-		const result = await db.query(
-			`
-        INSERT INTO tasks
-        (username, description)
-        VALUES ($1, $2)
-        RETURNING *`,
-			[ username, description ]
+		await db.query(
+			`INSERT INTO tasks (username, task_id)
+			VALUES ($1, $2)
+			RETURNING task_id AS "taskId", username, completed`,
+			[ username, key ]
 		);
-
-		const task = result.rows[0];
-		if (!task) throw new NotFoundError('Username not found');
-		return task;
 	}
 
 	// Mark a task as completed
-	// Returns {task_id, username, description, completed}
-	static async markComplete(taskId) {
+	// Returns {task_id, username, completed}
+	static async markComplete(username, key) {
 		const result = await db.query(
 			`
         UPDATE tasks
         SET completed = true
-        WHERE task_id = $1
-        RETURNING task_id AS "taskId", username, description, completed`,
-			[ taskId ]
+        WHERE task_id = $1 AND username = $2
+        RETURNING task_id AS "taskId", username, completed`,
+			[ key, username ]
 		);
 
 		const task = result.rows[0];
 
-		if (!task) throw new NotFoundError(`Task not found with ID: ${taskId}`);
+		if (!task) throw new NotFoundError(`Task not found with ID: ${key}`);
 		return task;
 	}
 
 	// Get all tasks associated with a user
-	// Returning [{taskId, username, description, completed}...]
+	// Returning [{taskId, username, completed}...]
 	static async getAllForUser(username) {
 		const userCheck = await db.query(`SELECT * FROM users WHERE username = $1`, [ username ]);
 		if (!userCheck.rows[0]) throw new NotFoundError('Username not found');
 
 		const result = await db.query(
 			`
-        SELECT task_id AS "taskId", username, description, completed FROM tasks
+        SELECT task_id AS "taskId", username, completed FROM tasks
         WHERE username = $1
         ORDER BY task_id`,
 			[ username ]
@@ -68,20 +71,20 @@ class Task {
 	}
 
 	// Remove a task from user's list
-	// Returns {deleted: taskId}
+	// Returns {deleted: Task #key from username}
 
-	static async remove(taskId) {
+	static async remove(username, key) {
 		const result = await db.query(
 			`
         DELETE FROM tasks
-        WHERE task_id = $1
+        WHERE task_id = $1 AND username = $2
         RETURNING task_id AS "taskId"`,
-			[ taskId ]
+			[ key, username ]
 		);
 
 		const deletedTask = result.rows[0];
-		if (!deletedTask) throw new NotFoundError(`Task not found with ID: ${taskId}`);
-		return { deleted: taskId };
+		if (!deletedTask) throw new NotFoundError(`Task not found with ID: ${key}`);
+		return { deleted: `Task #${key} from ${username}` };
 	}
 }
 

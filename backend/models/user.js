@@ -138,8 +138,6 @@ class User {
 
 		return { deleted: username };
 	}
-
-	// Add item to task list
 }
 
 module.exports = User;

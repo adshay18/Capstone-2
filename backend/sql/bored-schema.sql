@@ -11,7 +11,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE tasks (
-    task_id SERIAL,
+    task_id INTEGER,
     username VARCHAR(25) NOT NULL
         REFERENCES users ON DELETE CASCADE,
     completed BOOLEAN NOT NULL DEFAULT false,
