@@ -38,6 +38,9 @@ class Task {
 	// Mark a task as completed
 	// Returns {task_id, username, completed}
 	static async markComplete(username, key) {
+		const userCheck = await db.query(`SELECT * FROM users WHERE username = $1`, [ username ]);
+		if (!userCheck.rows[0]) throw new NotFoundError('Username not found');
+
 		const result = await db.query(
 			`
         UPDATE tasks
@@ -74,6 +77,9 @@ class Task {
 	// Returns {deleted: Task #key from username}
 
 	static async remove(username, key) {
+		const userCheck = await db.query(`SELECT * FROM users WHERE username = $1`, [ username ]);
+		if (!userCheck.rows[0]) throw new NotFoundError('Username not found');
+
 		const result = await db.query(
 			`
         DELETE FROM tasks

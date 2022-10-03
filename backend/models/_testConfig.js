@@ -3,10 +3,10 @@ const db = require('../db');
 const { BCRYPT_WORK_FACTOR } = require('../config');
 
 // sample task descriptions
-const taskDescriptions = {
-	videoGames: 'Play a video game with at least one friend.',
-	hike: 'Go on a hike that is 2 miles long!',
-	cooking: 'Make a meal with chicken, asparagus, and rice.'
+const keys = {
+	relaxation: 3699502,
+	recreational: 8503795,
+	cooking: 8061754
 };
 
 async function beforeAllTests() {
@@ -30,7 +30,7 @@ async function beforeAllTests() {
 	// Add tasks for users
 	await db.query(
 		`
-	    INSERT INTO tasks(username, description)
+	    INSERT INTO tasks(username, task_id)
 	    VALUES  ('Test1', $1),
 	            ('Test1', $2),
 	            ('Test2', $3),
@@ -38,14 +38,7 @@ async function beforeAllTests() {
 	            ('Test2', $5),
 	            ('Test3', $6)
 	            `,
-		[
-			taskDescriptions.videoGames,
-			taskDescriptions.hike,
-			taskDescriptions.videoGames,
-			taskDescriptions.hike,
-			taskDescriptions.cooking,
-			taskDescriptions.cooking
-		]
+		[ keys.relaxation, keys.recreational, keys.relaxation, keys.recreational, keys.cooking, keys.cooking ]
 	);
 
 	// Give users badges for number of complete tasks
