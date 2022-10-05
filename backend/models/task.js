@@ -5,7 +5,7 @@ const { NotFoundError, BadRequestError } = require('../expressError');
 
 class Task {
 	// Add a new task associated to a user
-	// Returns {task_id, username, completed}
+	// Returns {taskID, username, completed}
 
 	static async add(username, key) {
 		const userCheck = await db.query(
@@ -30,13 +30,13 @@ class Task {
 		await db.query(
 			`INSERT INTO tasks (username, task_id)
 			VALUES ($1, $2)
-			RETURNING task_id AS "taskId", username, completed`,
+			RETURNING task_id AS "taskID", username, completed`,
 			[ username, key ]
 		);
 	}
 
 	// Mark a task as completed
-	// Returns {task_id, username, completed}
+	// Returns {taskID, username, completed}
 	static async markComplete(username, key) {
 		const userCheck = await db.query(`SELECT * FROM users WHERE username = $1`, [ username ]);
 		if (!userCheck.rows[0]) throw new NotFoundError('Username not found');
@@ -46,7 +46,7 @@ class Task {
         UPDATE tasks
         SET completed = true
         WHERE task_id = $1 AND username = $2
-        RETURNING task_id AS "taskId", username, completed`,
+        RETURNING task_id AS "taskID", username, completed`,
 			[ key, username ]
 		);
 
@@ -57,14 +57,14 @@ class Task {
 	}
 
 	// Get all tasks associated with a user
-	// Returning [{taskId, username, completed}...]
+	// Returning [{taskID, username, completed}...]
 	static async getAllForUser(username) {
 		const userCheck = await db.query(`SELECT * FROM users WHERE username = $1`, [ username ]);
 		if (!userCheck.rows[0]) throw new NotFoundError('Username not found');
 
 		const result = await db.query(
 			`
-        SELECT task_id AS "taskId", username, completed FROM tasks
+        SELECT task_id AS "taskID", username, completed FROM tasks
         WHERE username = $1
         ORDER BY task_id`,
 			[ username ]
@@ -84,7 +84,7 @@ class Task {
 			`
         DELETE FROM tasks
         WHERE task_id = $1 AND username = $2
-        RETURNING task_id AS "taskId"`,
+        RETURNING task_id AS "taskID"`,
 			[ key, username ]
 		);
 
