@@ -6,6 +6,7 @@ const { NotFoundError } = require('./expressError');
 const { authenticateJWT } = require('./middleware/auth');
 const usersRoutes = require('./routes/users');
 const tasksRoutes = require('./routes/tasks');
+const badgeRoutes = require('./routes/collectedBadges');
 
 // Init app
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(authenticateJWT);
 app.use('/users', usersRoutes);
 app.use('/tasks', tasksRoutes);
+app.use('/collectedBadges', badgeRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function(req, res, next) {
