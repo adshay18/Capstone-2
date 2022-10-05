@@ -52,7 +52,7 @@ router.patch('/:username/:key', ensureCorrectUser, async function(req, res, next
 
 /** GET /username => { tasks: [task1, task2, task3...] }
  *
- * Returns { username, firstName, lastName, email, age, completedTasks, avatar }
+ * Returns { tasks: [task1, ...]}
  *
  * Authorization required: none
  **/
