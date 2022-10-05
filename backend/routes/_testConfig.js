@@ -1,10 +1,18 @@
 const db = require('../db.js');
 const User = require('../models/user.js');
+const Task = require('../models/task');
 const { createToken } = require('./helpers');
+
+const keys = {
+	relaxation: 3699502,
+	recreational: 8503795,
+	cooking: 8061754
+};
 
 async function commonBeforeAll() {
 	// noinspection SqlWithoutWhere
 	await db.query('DELETE FROM users');
+	await db.query('DELETE FROM tasks');
 
 	await User.register({
 		username: 'u1',
@@ -30,6 +38,12 @@ async function commonBeforeAll() {
 		email: 'user3@user.com',
 		age: 17
 	});
+	await Task.add('u1', keys.cooking);
+	await Task.add('u1', keys.recreational);
+	await Task.add('u1', keys.relaxation);
+	await Task.add('u2', keys.cooking);
+	await Task.add('u2', keys.recreational);
+	await Task.add('u3', keys.relaxation);
 }
 
 async function commonBeforeEach() {
