@@ -87,3 +87,20 @@ describe('GET /tasks/[username]', function() {
 });
 
 /************** DELETE /tasks/[username]/[key] */
+
+describe('DELETE /tasks/[username]/[key]', function() {
+	test('works', async function() {
+		const res = await request(app).delete('/tasks/u1/8503795').set('authorization', `Bearer ${u1Token}`);
+		expect(res.statusCode).toEqual(200);
+	});
+
+	test('fails for incorrect user', async function() {
+		const res = await request(app).delete('/tasks/u1/8503795').set('authorization', `Bearer ${u2Token}`);
+		expect(res.statusCode).toEqual(400);
+	});
+
+	test('fails on key not found', async function() {
+		const res = await request(app).delete('/tasks/u1/4124833').set('authorization', `Bearer ${u1Token}`);
+		expect(res.statusCode).toEqual(404);
+	});
+});
