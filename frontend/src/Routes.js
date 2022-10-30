@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar';
+import SignupForm from './SignupForm';
 
 const Routes = () => {
 	return (
@@ -17,26 +18,14 @@ const Routes = () => {
                             </header>
                         </div>
 					</Route>
-					{/* <Route exact path="/users/:username">
-						<div>
-
-                        </div>
-					</Route>
-					<Route path="/companies/:handle">
-						<CompanyDetail />
-					</Route>
-					<Route exact path="/jobs">
-						<JobList />
-					</Route>
-					<Route exact path="/login">
-						<LoginForm />
-					</Route>
-					<Route exact path="/signup">
+                    <Route exact path="/signup">
 						<SignupForm />
 					</Route>
-					<Route exact path="/profile">
-						<EditProfileForm />
-					</Route> */}
+					<Route exact path="/login">
+						<p>
+                            Future login form
+                        </p>
+					</Route>
 					<Route>
 						<p>404 page not found</p>
 					</Route>
