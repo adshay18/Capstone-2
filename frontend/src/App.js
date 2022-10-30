@@ -1,9 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import BoredApi from './Api';
 import jwt from 'jwt-decode';
 import UserContext from './UserContext';
+import Routes from './Routes';
 
 function App() {
 	const [ currUser, setCurrUser ] = useState({});
@@ -41,13 +41,7 @@ function App() {
 	
 	return (
 		<UserContext.Provider value={{ currUser, token, login, logout, signup }}>
-			<div className="App">
-			<header className="App-header">
-				<p>
-					Kelly is cute.
-				</p>
-			</header>
-		</div>
+			<Routes/>
 		</UserContext.Provider>
 	);
 }
