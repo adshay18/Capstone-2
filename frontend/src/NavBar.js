@@ -15,12 +15,9 @@ function NavBar() {
 
 				{currUser.username ? (
 					<Nav className="ml-auto" navbar>
-						{/* <NavItem>
-							<NavLink to="/jobs">Jobs</NavLink>
-						</NavItem>
 						<NavItem>
-							<NavLink to="/companies">Companies</NavLink>
-						</NavItem> */}
+							<NavLink to="/do-something">Do Something</NavLink>
+						</NavItem>
 						<NavItem>
 							<NavLink to="/profile">{currUser.username}</NavLink>
 						</NavItem>
