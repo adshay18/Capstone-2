@@ -2,7 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import BoredApi from './Api';
-import jwt from 'jwt-decode'
+import jwt from 'jwt-decode';
+import UserContext from './UserContext';
 
 function App() {
 	const [ currUser, setCurrUser ] = useState({});
@@ -37,8 +38,10 @@ function App() {
 		},
 		[ token ]
 	);
+	
 	return (
-		<div className="App">
+		<UserContext.Provider value={{ currUser, token, login, logout, signup }}>
+			<div className="App">
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
 				<p>
@@ -49,6 +52,7 @@ function App() {
 				</a>
 			</header>
 		</div>
+		</UserContext.Provider>
 	);
 }
 
