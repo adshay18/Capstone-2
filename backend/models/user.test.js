@@ -46,15 +46,13 @@ describe('register new user', function() {
 			password: 'testpass4',
 			firstName: 'test',
 			lastName: 'four',
-			email: 'test.4@gmail.com',
-			age: 3
+			email: 'test.4@gmail.com'
 		});
 		expect(user).toEqual({
 			username: 'Test4',
 			firstName: 'test',
 			lastName: 'four',
 			email: 'test.4@gmail.com',
-			age: 3,
 			completedTasks: 0
 		});
 	});
@@ -66,8 +64,7 @@ describe('register new user', function() {
 				password: 'testpass4',
 				firstName: 'test',
 				lastName: 'four',
-				email: 'test.4@gmail.com',
-				age: 3
+				email: 'test.4@gmail.com'
 			});
 		} catch (e) {
 			expect(e instanceof BadRequestError).toBeTruthy();
@@ -86,7 +83,6 @@ describe('find users by username', function() {
 			firstName: 'test',
 			lastName: 'three',
 			email: 'test.3@gmail.com',
-			age: 15,
 			completedTasks: 504,
 			avatar: null
 		});
@@ -113,7 +109,6 @@ describe('accepts partial update for a user', function() {
 			firstName: 'test',
 			lastName: 'three',
 			email: 'test.3@gmail.com',
-			age: 15,
 			completedTasks: 504,
 			avatar: null
 		});
@@ -124,7 +119,6 @@ describe('accepts partial update for a user', function() {
 			firstName: 'test',
 			lastName: 'three',
 			email: 'test.3@gmail.com',
-			age: 15,
 			completedTasks: 505,
 			avatar: 'URL'
 		});

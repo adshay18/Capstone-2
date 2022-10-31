@@ -34,7 +34,7 @@ class User {
 
 	// Add new user
 	// Returns {username, firstName, lastName, email, age, completedTasks}
-	static async register({ username, password, firstName, lastName, email, age, completedTasks = 0, avatar = null }) {
+	static async register({ username, password, firstName, lastName, email, completedTasks = 0, avatar = null }) {
 		const duplicateCheck = await db.query(
 			`SELECT username
            FROM users
@@ -55,12 +55,11 @@ class User {
             first_name,
             last_name,
             email,
-            age,
             completed_tasks,
             avatar)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-           RETURNING username, first_name AS "firstName", last_name AS "lastName", email, age, completed_tasks AS "completedTasks"`,
-			[ username, hashedPassword, firstName, lastName, email, age, completedTasks, avatar ]
+           VALUES ($1, $2, $3, $4, $5, $6, $7)
+           RETURNING username, first_name AS "firstName", last_name AS "lastName", email, completed_tasks AS "completedTasks"`,
+			[ username, hashedPassword, firstName, lastName, email, completedTasks, avatar ]
 		);
 
 		const user = result.rows[0];
@@ -77,7 +76,6 @@ class User {
                   first_name AS "firstName",
                   last_name AS "lastName",
                   email,
-				  age,
 				  completed_tasks AS "completedTasks",
 				  avatar
            FROM users
@@ -111,7 +109,7 @@ class User {
 		const query = `	UPDATE users
 						SET ${setCols}
 						WHERE username = ${usernameIdx}
-						RETURNING username, first_name AS "firstName", last_name AS "last_name", email, age, avatar, completed_tasks AS "completedTasks"`;
+						RETURNING username, first_name AS "firstName", last_name AS "last_name", email avatar, completed_tasks AS "completedTasks"`;
 
 		const result = await db.query(query, [ ...values, username ]);
 		const user = result.rows[0];
