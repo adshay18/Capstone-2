@@ -10,13 +10,7 @@ const Routes = () => {
             <main>
 				<Switch>
 					<Route exact path="/">
-                        <div className="App">
-                            <header className="App-header">
-                            <p>
-                                Future homepage.
-                            </p>
-                            </header>
-                        </div>
+                        Home
 					</Route>
                     <Route exact path="/signup">
 						<SignupForm />
