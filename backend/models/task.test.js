@@ -16,12 +16,12 @@ describe('find all tasks a user has saved', function() {
 		const tasks = await Task.getAllForUser('Test1');
 		expect(tasks).toEqual([
 			{
-				taskId: expect.any(Number),
+				taskID: expect.any(Number),
 				username: 'Test1',
 				completed: false
 			},
 			{
-				taskId: expect.any(Number),
+				taskID: expect.any(Number),
 				username: 'Test1',
 				completed: false
 			}
@@ -47,12 +47,12 @@ describe('add a new task to db', function() {
 		const tasks = await Task.getAllForUser('Test3');
 		expect(tasks).toEqual([
 			{
-				taskId: expect.any(Number),
+				taskID: expect.any(Number),
 				username: 'Test3',
 				completed: false
 			},
 			{
-				taskId: expect.any(Number),
+				taskID: expect.any(Number),
 				username: 'Test3',
 				completed: false
 			}
@@ -82,11 +82,11 @@ describe('mark task as complete', function() {
 	test('works', async function() {
 		//get id to use
 		const tasks = await Task.getAllForUser('Test3');
-		const testId = tasks[0].taskId;
+		const testId = tasks[0].taskID;
 
 		const update = await Task.markComplete('Test3', testId);
 		expect(update).toEqual({
-			taskId: testId,
+			taskID: testId,
 			username: 'Test3',
 			completed: true
 		});
@@ -94,7 +94,7 @@ describe('mark task as complete', function() {
 		const updatedTasks = await Task.getAllForUser('Test3');
 		expect(updatedTasks).toEqual([
 			{
-				taskId: testId,
+				taskID: testId,
 				username: 'Test3',
 				completed: true
 			}
@@ -116,10 +116,10 @@ describe('mark task as complete', function() {
 describe('removes task from db', function() {
 	test('works', async function() {
 		const tasks = await Task.getAllForUser('Test3');
-		const testId = tasks[0].taskId;
+		const testId = tasks[0].taskID;
 		expect(tasks).toEqual([
 			{
-				taskId: testId,
+				taskID: testId,
 				username: 'Test3',
 				completed: false
 			}
