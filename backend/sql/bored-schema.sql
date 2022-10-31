@@ -5,7 +5,6 @@ CREATE TABLE users (
     password TEXT NOT NULL,
     email TEXT NOT NULL
         CHECK (position('@' IN email) > 1),
-    age INTEGER,
     completed_tasks INTEGER DEFAULT 0,
     avatar TEXT
 );

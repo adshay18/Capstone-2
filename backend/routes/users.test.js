@@ -30,8 +30,7 @@ describe('POST /users/register', function() {
 			firstName: 'Test',
 			lastName: 'User',
 			password: 'tp12345',
-			email: 'test@gmail.com',
-			age: 35
+			email: 'test@gmail.com'
 		});
 		expect(res.statusCode).toEqual(201);
 	});
@@ -85,7 +84,6 @@ describe('GET /users/:username', function() {
 				firstName: 'U1F',
 				lastName: 'U1L',
 				email: 'user1@user.com',
-				age: 15,
 				completedTasks: 0,
 				avatar: null
 			}
@@ -110,7 +108,7 @@ describe('PATCH /users/:username', function() {
 	});
 
 	test('fails for incorrect user', async function() {
-		const res = await request(app).patch('/users/u2').send({ age: 13 }).set('authorization', `Bearer ${u3Token}`);
+		const res = await request(app).patch('/users/u2').send({ firstName: "Jeff" }).set('authorization', `Bearer ${u3Token}`);
 		expect(res.statusCode).toEqual(400);
 	});
 });

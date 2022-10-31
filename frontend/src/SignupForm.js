@@ -29,11 +29,20 @@ const SignupForm = () => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setFormData((data) => ({
+		if(name === "age"){
+			setFormData((data)=>({
+				...data,
+				[name]: value
+			}));
+			console.log((formData.age))
+		};
+		setFormData((data)=> ({
 			...data,
 			[name]: value
 		}));
 	};
+		
+
 	return (
 		<Card>
 			<CardTitle>Sign Up</CardTitle>
@@ -91,17 +100,6 @@ const SignupForm = () => {
 							id="email"
 							name="email"
 							value={formData.email}
-							onChange={handleChange}
-							required
-						/>
-					</FormGroup>
-					<FormGroup>
-						<Label htmlFor="email">Age</Label>
-						<Input
-							type="number"
-							id="age"
-							name="age"
-							value={formData.age}
 							onChange={handleChange}
 							required
 						/>

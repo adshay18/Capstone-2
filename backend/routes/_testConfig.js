@@ -21,24 +21,21 @@ async function commonBeforeAll() {
 		password: 'password1',
 		firstName: 'U1F',
 		lastName: 'U1L',
-		email: 'user1@user.com',
-		age: 15
+		email: 'user1@user.com'
 	});
 	await User.register({
 		username: 'u2',
 		password: 'password2',
 		firstName: 'U2F',
 		lastName: 'U2L',
-		email: 'user2@user.com',
-		age: 12
+		email: 'user2@user.com'
 	});
 	await User.register({
 		username: 'u3',
 		password: 'password3',
 		firstName: 'U3F',
 		lastName: 'U3L',
-		email: 'user3@user.com',
-		age: 17
+		email: 'user3@user.com'
 	});
 
 	await Task.add('u1', keys.cooking);

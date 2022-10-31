@@ -34,11 +34,6 @@
 			"format": "email",
 			"default": ""
 		},
-		"age": {
-			"type": "integer",
-			"minimum": 13,
-			"default": null
-		},
 		"completedTasks": {
 			"type": "integer",
 			"default": 0
@@ -49,5 +44,5 @@
 		}
 	},
 	"additionalProperties": false,
-	"required": [ "username", "firstName", "lastName", "password", "email", "age" ]
+	"required": [ "username", "firstName", "lastName", "password", "email" ]
 }
