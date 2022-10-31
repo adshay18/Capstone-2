@@ -6,7 +6,7 @@ import './SignupForm.css';
 import BoredApi from './Api';
 
 const SignupForm = () => {
-	const INIT = { username: '', password: '', firstName: '', lastName: '', email: '', age: '' };
+	const INIT = { username: '', password: '', firstName: '', lastName: '', email: ''};
 	const [ formData, setFormData ] = useState(INIT);
 	const history = useHistory();
 	const { login, signup } = useContext(UserContext);
@@ -29,13 +29,6 @@ const SignupForm = () => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		if(name === "age"){
-			setFormData((data)=>({
-				...data,
-				[name]: value
-			}));
-			console.log((formData.age))
-		};
 		setFormData((data)=> ({
 			...data,
 			[name]: value
