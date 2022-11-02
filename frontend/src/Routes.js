@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
 import SignupForm from './SignupForm';
+import Home from './Home'
 
 const Routes = () => {
 	return (
@@ -11,13 +12,16 @@ const Routes = () => {
             <main>
 				<Switch>
 					<Route exact path="/">
-                        Home
+                        <Home />
 					</Route>
                     <Route exact path="/signup">
 						<SignupForm />
 					</Route>
 					<Route exact path="/login">
 						<LoginForm />
+					</Route>
+					<Route path="/users/:username">
+						<p>future user data</p>
 					</Route>
 					<Route>
 						<p>404 page not found</p>
