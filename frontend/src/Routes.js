@@ -4,6 +4,7 @@ import LoginForm from './LoginForm';
 import NavBar from './NavBar';
 import SignupForm from './SignupForm';
 import Home from './Home'
+import User from './User';
 
 const Routes = () => {
 	return (
@@ -21,7 +22,7 @@ const Routes = () => {
 						<LoginForm />
 					</Route>
 					<Route path="/users/:username">
-						<p>future user data</p>
+						<User/>
 					</Route>
 					<Route>
 						<p>404 page not found</p>

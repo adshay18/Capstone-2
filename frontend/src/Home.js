@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import UserContext from './UserContext';
 import './Home.css';
 
-function Home() {
+const Home = () => {
 	const { currUser } = useContext(UserContext);
 	return (
 		<section className="col-md-8">
