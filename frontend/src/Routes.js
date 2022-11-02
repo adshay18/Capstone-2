@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import LoginForm from './LoginForm';
 import NavBar from './NavBar';
 import SignupForm from './SignupForm';
 
@@ -16,9 +17,7 @@ const Routes = () => {
 						<SignupForm />
 					</Route>
 					<Route exact path="/login">
-						<p>
-                            Future login form
-                        </p>
+						<LoginForm />
 					</Route>
 					<Route>
 						<p>404 page not found</p>
