@@ -5,6 +5,7 @@ import NavBar from './NavBar';
 import SignupForm from './SignupForm';
 import Home from './Home'
 import User from './User';
+import ActivityForm from './ActivityForm';
 
 const Routes = () => {
 	return (
@@ -23,6 +24,9 @@ const Routes = () => {
 					</Route>
 					<Route path="/users/:username">
 						<User/>
+					</Route>
+					<Route exact path="/do-something">
+						<ActivityForm />
 					</Route>
 					<Route>
 						<p>404 page not found</p>
