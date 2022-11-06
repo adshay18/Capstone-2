@@ -3,21 +3,34 @@ import { useHistory } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button, Card, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 import UserContext from './UserContext';
 import './ActivityForm.css';
+import axios from 'axios';
 import BoredApi from './Api';
 
 const ActivityForm = () => {
+    // Initial Form Data
 	const INIT = { type: "select", participants: 1, price: "Yes"};
 	const [ formData, setFormData ] = useState(INIT);
-	const history = useHistory();
-	const { login, signup } = useContext(UserContext);
 	const [ errors, setErrors ] = useState([]);
     const types = ["select", "education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"];
     const participants = [1, 2, 3, 4, 5, 6, 7, 8]
 
+    // Form submission variables
+    const url = `http://www.boredapi.com/api/activity?type=${formData.type}&participants=${formData.participants}`
+    const [submitted, setSubmitted] = useState(false)
+    const [results, setResults] = useState(null)
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			alert('you clicked submit')
+            if(formData.price==="yes"){
+                const res = await axios.get(url+'&price=0.0');
+                setResults(res.data);
+                setSubmitted(true);
+            } else{
+                const res = await axios.get(url);
+                setResults(res.data);
+                setSubmitted(true);
+            };
 		} catch (err) {
 			setErrors(err);
 		}
@@ -25,16 +38,26 @@ const ActivityForm = () => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-        console.log(name, value)
 		setFormData((data)=> ({
 			...data,
 			[name]: value
 		}));
 	};
 		
+    const handleClick = async (e) => {
+        e.preventDefault();
+        try{
+            const res = await axios.get('http://www.boredapi.com/api/activity/');
+            setResults(res.data);
+            setSubmitted(true);
+        } catch (err) {
+            setSubmitted(false)
+        }
+    }
 
 	return (
-		<Card>
+        <div>
+            <Card>
 			<CardTitle>Bored No More!</CardTitle>
 			{errors ? <CardSubtitle>{errors}</CardSubtitle> : null}
 			<CardBody>
@@ -77,8 +100,17 @@ const ActivityForm = () => {
 					</FormGroup>
 					<Button>Submit</Button>
 				</Form>
+                <Button onClick={handleClick}>Random</Button>
 			</CardBody>
 		</Card>
+        {submitted ? 
+            <div>
+                {console.log(results)}
+                <p>Results: {results.error ? "Oops! Try different filters or a random activity" : results.activity}</p>
+            </div>
+            : null}
+        </div>
+		
 	);
 };
 
