@@ -26,7 +26,6 @@ const User = () =>{
         
         <section className='col-md-8'>
             <Card>
-                {console.log(userDetails)}
                 {notFound ? '404 not found' : <CardBody className='text-center'>
                     <CardTitle className="font-weight-bold">
 						<b>{userDetails ? userDetails.username : "Loading..."}</b>
