@@ -26,7 +26,8 @@ function App() {
 		() => {
 			async function getUser(username) {
 				let res = await BoredApi.getUser(username);
-				setCurrUser(res.user);
+				let activities = await BoredApi.getTasksForUser(username);
+				setCurrUser({...res.user, activities: activities.tasks});
 			}
 			if (token) {
 				BoredApi.token = token;

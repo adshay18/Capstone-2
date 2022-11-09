@@ -14,9 +14,10 @@ class BoredApi {
 
 		const url = `${BASE_URL}/${endpoint}`;
 		const params = method === 'get' ? data : {};
+		const headers = { Authorization: `Bearer ${BoredApi.token}` };
 
 		try {
-			return (await axios({ url, method, data, params })).data;
+			return (await axios({ url, method, data, params, headers })).data;
 		} catch (err) {
 			console.error('API Error:', err.response);
 			let message = err.response.data.error.message;

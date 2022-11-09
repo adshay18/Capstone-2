@@ -4,14 +4,14 @@ import { Form, FormGroup, Label, Input, Button, Card, CardBody, CardTitle, CardS
 import UserContext from './UserContext';
 import './ActivityForm.css';
 import axios from 'axios';
-import BoredApi from './Api';
+import ActivityCard from './ActivityCard';
 
 const ActivityForm = () => {
     // Initial Form Data
-	const INIT = { type: "select", participants: 1, price: "Yes"};
+	const INIT = { type: "education", participants: 1, price: "Yes"};
 	const [ formData, setFormData ] = useState(INIT);
 	const [ errors, setErrors ] = useState([]);
-    const types = ["select", "education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"];
+    const types = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"];
     const participants = [1, 2, 3, 4, 5, 6, 7, 8]
 
     // Form submission variables
@@ -19,6 +19,9 @@ const ActivityForm = () => {
     const [submitted, setSubmitted] = useState(false)
     const [results, setResults] = useState(null)
 
+    // ------------ Form handlers -------------------
+
+    // Handle form submit button
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -36,6 +39,7 @@ const ActivityForm = () => {
 		}
 	};
 
+    // Control elements in the form
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((data)=> ({
@@ -44,6 +48,7 @@ const ActivityForm = () => {
 		}));
 	};
 		
+    // Handle click of random button
     const handleClick = async (e) => {
         e.preventDefault();
         try{
@@ -105,8 +110,7 @@ const ActivityForm = () => {
 		</Card>
         {submitted ? 
             <div>
-                {console.log(results)}
-                <p>Results: {results.error ? "Oops! Try different filters or a random activity" : results.activity}</p>
+               {results.error ? <p>"Oops! Try different filters or a random activity"</p> : <ActivityCard id={results.key} results={results.activity}/>}
             </div>
             : null}
         </div>
