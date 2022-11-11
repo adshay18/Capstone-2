@@ -110,7 +110,7 @@ const ActivityForm = () => {
 		</Card>
         {submitted ? 
             <div>
-               {results.error ? <p>"Oops! Try different filters or a random activity"</p> : <ActivityCard id={results.key} results={results.activity}/>}
+               {results.error ? <p>"Oops! Try different filters or a random activity"</p> : <ActivityCard id={+results.key} results={results.activity}/>}
             </div>
             : null}
         </div>
