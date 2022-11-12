@@ -1,13 +1,11 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import BoredApi from './Api';
 import jwt from 'jwt-decode';
 import UserContext from './UserContext';
 import Routes from './Routes';
 
 function App() {
-	let history = useHistory();
 	const [ currUser, setCurrUser ] = useState({});
 	const [ token, setToken ] = useState(localStorage.getItem('User-Token'));
 	const login = (token) => {
@@ -29,7 +27,6 @@ function App() {
 		() => {
 			async function getUser(username) {
 				let res = await BoredApi.getUser(username);
-				// let activities = await BoredApi.getTasksForUser(username);
 				setCurrUser({...res.user});
 			}
 			if (token) {
