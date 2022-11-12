@@ -7,6 +7,8 @@ const jsonschema = require('jsonschema');
 const express = require('express');
 const { BadRequestError } = require('../expressError');
 const User = require('../models/user');
+const Task = require('../models/task');
+const CollectedBadge = require('../models/collectedBadge')
 const userNewSchema = require('../schemas/userNewSchema.json');
 const userUpdateSchema = require('../schemas/userUpdateSchema.json');
 const userLoginSchema = require('../schemas/userLoginSchema.json');
@@ -74,8 +76,10 @@ router.post('/token', async function(req, res, next) {
 
 router.get('/:username', async function(req, res, next) {
 	try {
-		const user = await User.get(req.params.username);
-		return res.json({ user });
+		let userInfo = await User.get(req.params.username);
+		let tasks = await Task.getAllForUser(req.params.username)
+		let collectedBadges = await CollectedBadge.getAllForUser(req.params.username)
+		return res.json({ user: {...userInfo, activities: tasks, badges: collectedBadges} });
 	} catch (err) {
 		return next(err);
 	}
