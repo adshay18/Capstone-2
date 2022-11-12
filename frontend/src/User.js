@@ -10,34 +10,30 @@ const User = () =>{
     const {currUser} = useContext(UserContext);
     let {username} = useParams();
     const [userDetails, setUserDetails] = useState(null);
-    const [notFound, setNotFound] = useState(false)
-    const [badges, setBadges] = useState([])
     const [activities, setActivities] = useState([])
+    const [notFound, setNotFound] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
+        // get initial user data and extrapolate user's activities and badges
         async function getUserDetails(username) {
             try{
             let res = await BoredApi.getUser(username);
-            let activities = await BoredApi.getTasksForUser(username);
             setUserDetails(res.user)
-            setActivities(activities.tasks)
+            setActivities(res.user.activities)
+            setLoading(false)
             } catch {
                 setNotFound(true)
             }    
         }
 
         getUserDetails(username);
-
-        if(!notFound) {
-            console.log(userDetails)
-            BoredApi.getBadges(username).then(res => setBadges(res.badges)).catch(err => setBadges([]))
-        }
     }, [username])
 
     return (
         
         <section className='col-md-8'>
-            <Card>
+            {loading ? <p>Loading...</p> : <Card>
                 {notFound ? '404 not found' : <CardBody className='text-center'>
                     <CardTitle className="font-weight-bold">
 						<b>{userDetails ? userDetails.username : "Loading..."}</b>
@@ -52,14 +48,14 @@ const User = () =>{
                             Badges: {userDetails ? userDetails.completedTasks : "Loading..."}
                         </h3>
                         <ul>
-                            {badges.map(badge => <li key={badge.Id}>{badge.Id}</li>)}
+                            {/* {badges.map(badge => <li key={badge.Id}>{badge.Id}</li>)} */}
                         </ul>
                     </div>
                     <div className='activities'>
                         {activities.map(activity => <ActivityCard key={activity.taskID} id={activity.taskID}/>)}
                     </div>
                 </CardBody>}
-            </Card>
+            </Card>}
         </section>
     );
 };
