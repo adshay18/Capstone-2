@@ -32,11 +32,15 @@ const ActivityCard = ({id}) =>{
     // Get details for each task and create ID list to check tasks on screen against current user's list of tasks
     useEffect(
         () => {
-            let bin = [];
-            for (let i = 0; i < toDoList.length; i++) {
-                bin.push(toDoList[i].taskID)
-                setIds(bin)
-            };
+            try{
+                let bin = [];
+                for (let i = 0; i < toDoList.length; i++) {
+                    bin.push(toDoList[i].taskID)
+                    setIds(bin)
+                };
+            } catch {
+                setErr(true)
+            }
 
             async function getText(key) {
                 try{
