@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import BoredApi from './Api';
 import UserContext from './UserContext';
 import './Home.css';
+import ActivityCard from './ActivityCard';
 
 const User = () =>{
     const {currUser} = useContext(UserContext);
@@ -11,13 +12,24 @@ const User = () =>{
     const [userDetails, setUserDetails] = useState(null);
     const [notFound, setNotFound] = useState(false)
     const [badges, setBadges] = useState([])
+    const [activities, setActivities] = useState([])
 
     useEffect(()=>{
-        BoredApi.getUser(username)
-            .then(res => setUserDetails(res.user))
-            .then(res => setNotFound(false))
-            .catch(err => setNotFound(true))
+        async function getUserDetails(username) {
+            try{
+            let res = await BoredApi.getUser(username);
+            let activities = await BoredApi.getTasksForUser(username);
+            setUserDetails(res.user)
+            setActivities(activities.tasks)
+            } catch {
+                setNotFound(true)
+            }    
+        }
+
+        getUserDetails(username);
+
         if(!notFound) {
+            console.log(userDetails)
             BoredApi.getBadges(username).then(res => setBadges(res.badges)).catch(err => setBadges([]))
         }
     }, [username])
@@ -42,6 +54,9 @@ const User = () =>{
                         <ul>
                             {badges.map(badge => <li key={badge.Id}>{badge.Id}</li>)}
                         </ul>
+                    </div>
+                    <div className='activities'>
+                        {activities.map(activity => <ActivityCard key={activity.taskID} id={activity.taskID}/>)}
                     </div>
                 </CardBody>}
             </Card>
