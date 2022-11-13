@@ -19,8 +19,16 @@ const User = () =>{
         async function getUserDetails(username) {
             try{
             let res = await BoredApi.getUser(username);
+            let activityList = res.user.activities;
+            console.log(activityList)
+            let temp = [];
+            for (let i = 0; i < activityList.length; i++) {
+                if (!activityList[i].completed) {
+                    temp.push(activityList[i])
+                }
+            }
             setUserDetails(res.user)
-            setActivities(res.user.activities)
+            setActivities(temp)
             setLoading(false)
             } catch {
                 setNotFound(true)
@@ -45,7 +53,7 @@ const User = () =>{
                     </div>
                     <div>
                         <h3>
-                            Badges: {userDetails ? userDetails.completedTasks : "Loading..."}
+                            All time things done: {userDetails ? userDetails.completedTasks : "Loading..."}
                         </h3>
                         <ul>
                             {/* {badges.map(badge => <li key={badge.Id}>{badge.Id}</li>)} */}

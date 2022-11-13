@@ -14,6 +14,7 @@ const ActivityCard = ({id}) =>{
     const [err, setErr] = useState(false)
     const [loading, setLoading] = useState(true)
     const [match, setMatch] = useState(false)
+    const [display, setDisplay] = useState(true)
 
    
     // Add activity to user's list of things to do
@@ -34,6 +35,20 @@ const ActivityCard = ({id}) =>{
             }
         }
         setToDoList(temp)
+        setDisplay(false)
+    }
+
+    // Mark a task as completed
+    const done = async (username, id) => {
+        await BoredApi.markComplete(username, id)
+        let temp = [...toDoList]
+        for (let i = 0; i < toDoList.length; i++) {
+            if(toDoList[i].taskID === id) {
+                temp.splice(i, 1)
+            }
+        }
+        setToDoList(temp)
+        setDisplay(false)
     }
 
     // Gather data on current user and update loading status
@@ -74,20 +89,26 @@ const ActivityCard = ({id}) =>{
     );
 
         return(
-            <Card className="card activity-link">
-                {loading ? <p>Loading...</p> : 
-                <CardBody>
-                <CardSubtitle>{err? 'Oops! Something went wrong' : text}</CardSubtitle>
-                    {ids.includes(id) ? null : (
-                        <Button onClick={() => add(currUser.username, id)}>Add</Button>
-                    )}
-                    {match ? (<Button>Done</Button>)
-                     : null}
-                    {match ? (<Button onClick={() => remove(currUser.username, id)}>Delete</Button>)
-                     : null}
-                </CardBody>
-                }
-            </Card> 
+            <section>
+                {display ? 
+                    <Card className="card activity-link">
+                        {loading ? <p>Loading...</p> : 
+                        <CardBody>
+                        <CardSubtitle>{err? 'Oops! Something went wrong' : text}</CardSubtitle>
+                            {ids.includes(id) ? null : (
+                                <Button onClick={() => add(currUser.username, id)}>Add</Button>
+                            )}
+                            {match ? (<Button onClick={() => done(currUser.username, id)}>Done</Button>)
+                            : null}
+                            {match ? (<Button onClick={() => remove(currUser.username, id)}>Delete</Button>)
+                            : null}
+                        </CardBody>
+                        }
+                    </Card> 
+                : null}
+                
+            </section>
+            
 	);
 };
 
