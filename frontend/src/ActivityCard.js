@@ -1,19 +1,22 @@
 import axios from 'axios';
 import React, { useContext, useState, useEffect } from 'react';
 import { Button, Card, CardBody, CardSubtitle } from 'reactstrap';
+import { useParams } from 'react-router-dom';
 import BoredApi from './Api';
 import UserContext from './UserContext';
 
 const ActivityCard = ({id}) =>{
     const {currUser} = useContext(UserContext)
+    let {username} = useParams();
     const [toDoList, setToDoList] = useState([])
     const [ids, setIds] = useState([])
     const [text, setText] = useState('')
     const [err, setErr] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [match, setMatch] = useState(false)
 
    
-
+    // Add activity to user's list of things to do
     const add = async (username, id) => {
         await BoredApi.addTask(username, id)
         setToDoList([...toDoList, {taskID: +id, 
@@ -21,11 +24,26 @@ const ActivityCard = ({id}) =>{
                 completed: false}]);
     };
 
+    // Remove activity from user's list of things to do
+    const remove = async (username, id) => {
+        await BoredApi.deleteTask(username, id)
+        let temp = [...toDoList]
+        for (let i = 0; i < toDoList.length; i++) {
+            if(toDoList[i].taskID === id) {
+                temp.splice(i, 1)
+            }
+        }
+        setToDoList(temp)
+    }
+
     // Gather data on current user and update loading status
     useEffect(
         () => {
             setToDoList(currUser.activities)
             setLoading(false)
+            if (currUser.username === username) {
+                setMatch(true)
+            }
         }, [currUser]
     );
 
@@ -60,11 +78,13 @@ const ActivityCard = ({id}) =>{
                 {loading ? <p>Loading...</p> : 
                 <CardBody>
                 <CardSubtitle>{err? 'Oops! Something went wrong' : text}</CardSubtitle>
-                    {ids.includes(id) ? (
-                        <Button>Added</Button>
-                    ) : (
+                    {ids.includes(id) ? null : (
                         <Button onClick={() => add(currUser.username, id)}>Add</Button>
                     )}
+                    {match ? (<Button>Done</Button>)
+                     : null}
+                    {match ? (<Button onClick={() => remove(currUser.username, id)}>Delete</Button>)
+                     : null}
                 </CardBody>
                 }
             </Card> 

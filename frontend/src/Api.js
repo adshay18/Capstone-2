@@ -58,7 +58,7 @@ class BoredApi {
 
 	// Delete a user
 	static async deleteUser(username) {
-		let res = await this.request(`users/${username}`, 'delete');
+		let res = await this.request(`users/${username}`, {}, 'delete');
 		return res;
 	}
 
@@ -84,7 +84,7 @@ class BoredApi {
 
 	// Delete a task
 	static async deleteTask(username, key) {
-		let res = await this.request(`tasks/${username}/${key}`);
+		let res = await this.request(`tasks/${username}/${key}`, {}, 'delete');
 		return res;
 	}
 
