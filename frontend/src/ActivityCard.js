@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import BoredApi from './Api';
 import UserContext from './UserContext';
 
-const ActivityCard = ({id}) =>{
+const ActivityCard = ({id, updateTotal}) =>{
     const {currUser} = useContext(UserContext)
     let {username} = useParams();
     const [toDoList, setToDoList] = useState([])
@@ -48,6 +48,7 @@ const ActivityCard = ({id}) =>{
             }
         }
         setToDoList(temp)
+        updateTotal()
         setDisplay(false)
     }
 
