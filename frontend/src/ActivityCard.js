@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState, useEffect } from 'react';
 import { Button, Card, CardBody, CardSubtitle } from 'reactstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import BoredApi from './Api';
 import UserContext from './UserContext';
 
@@ -47,20 +47,20 @@ const ActivityCard = ({id, updateTotal}) =>{
                 temp.splice(i, 1)
             }
         }
-        setToDoList(temp)
-        updateTotal()
-        setDisplay(false)
+        setToDoList(temp);
+        updateTotal();
+        setDisplay(false);
     }
 
     // Gather data on current user and update loading status
     useEffect(
         () => {
             setToDoList(currUser.activities)
-            setLoading(false)
             if (currUser.username === username) {
                 setMatch(true)
-            }
-        }, [currUser]
+            };
+            setLoading(false);
+        }, [username]
     );
 
     // Get details for each task and create ID list to check tasks on screen against current user's list of tasks
@@ -69,21 +69,21 @@ const ActivityCard = ({id, updateTotal}) =>{
             try{
                 let bin = [];
                 for (let i = 0; i < toDoList.length; i++) {
-                    bin.push(toDoList[i].taskID)
-                    setIds(bin)
+                    bin.push(toDoList[i].taskID);
+                    setIds(bin);
                 };
             } catch {
-                setErr(true)
-            }
+                setErr(true);
+            };
 
             async function getText(key) {
                 try{
                     let res = await axios.get(`https://www.boredapi.com/api/activity?key=${key}`)
-                    setText(res.data.activity)
+                    setText(res.data.activity);
                 } catch{
-                    setErr(true)
-                }
-            }
+                    setErr(true);
+                };
+            };
 
             getText(id);
         }, [toDoList, currUser]
@@ -96,9 +96,11 @@ const ActivityCard = ({id, updateTotal}) =>{
                         {loading ? <p>Loading...</p> : 
                         <CardBody>
                         <CardSubtitle>{err? 'Oops! Something went wrong' : text}</CardSubtitle>
-                            {ids.includes(id) ? null : (
-                                <Button onClick={() => add(currUser.username, id)}>Add</Button>
-                            )}
+                            {match ? null : 
+                                (ids.includes(id) ?  null : 
+                                    (<Button onClick={() => add(currUser.username, id)}>Add</Button>)
+                                )
+                            }
                             {match ? (<Button onClick={() => done(currUser.username, id)}>Done</Button>)
                             : null}
                             {match ? (<Button onClick={() => remove(currUser.username, id)}>Delete</Button>)

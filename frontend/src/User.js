@@ -43,7 +43,7 @@ const User = () =>{
         }
 
         getUserDetails(username);
-    }, [username])
+    }, [username, currUser])
 
     return (
         
