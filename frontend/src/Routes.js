@@ -6,6 +6,7 @@ import SignupForm from './SignupForm';
 import Home from './Home'
 import User from './User';
 import ActivityForm from './ActivityForm';
+import BadgePage from './BadgePage';
 
 const Routes = () => {
 	return (
@@ -24,6 +25,9 @@ const Routes = () => {
 					</Route>
 					<Route path="/users/:username">
 						<User/>
+					</Route>
+					<Route path="/badges/:username">
+						<BadgePage />
 					</Route>
 					<Route exact path="/do-something">
 						<ActivityForm />

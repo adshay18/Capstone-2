@@ -73,7 +73,7 @@ const User = () =>{
                             </span> 
                             <br></br>
                             <span className="number"> {badges} 
-                                <span className="follow">Badges</span>
+                                <Link to={`/badges/${username}`} className="follow">Badges</Link>
                             </span> 
                         </div> 
                         <div className="d-flex mt-2"> 
