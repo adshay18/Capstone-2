@@ -60,7 +60,6 @@ const User = () =>{
             <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
                 {loading ? <p>Loading...</p> :
                 <div className="card p-4"> 
-                {console.log(userDetails)}
                     <div className=" image d-flex flex-column justify-content-center align-items-center"> 
                         <button className="btn btn-secondary avatar-holder"> 
                             <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
