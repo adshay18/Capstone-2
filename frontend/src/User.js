@@ -3,7 +3,7 @@ import { Card, CardBody, CardTitle, Button } from 'reactstrap';
 import { Link, useParams } from 'react-router-dom';
 import BoredApi from './Api';
 import UserContext from './UserContext';
-import './Home.css';
+import './User.css';
 import ActivityCard from './ActivityCard';
 
 const User = () =>{
@@ -48,11 +48,33 @@ const User = () =>{
     return (
         
         <section className='col-md-8'>
-            {loading ? <p>Loading...</p> : <Card>
-                {notFound ? '404 not found' : <CardBody className='text-center'>
-                    <CardTitle className="font-weight-bold">
-						<b>{userDetails ? userDetails.username : "Loading..."}</b>
-					</CardTitle>
+            {notFound ? '404 user not found' :
+            <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                {loading ? <p>Loading...</p> :
+                <div className="card p-4"> 
+                    <div className=" image d-flex flex-column justify-content-center align-items-center"> 
+                        <button className="btn btn-secondary avatar-holder"> 
+                            <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+                        </button> 
+                        <span className="name mt-3">{userDetails.firstName} {userDetails.lastName}</span> 
+                        <span className="idd">@{userDetails.username}</span> 
+                        <div className="d-flex flex-row justify-content-center align-items-center mt-3"> 
+                            <span className="number"> {userDetails.completedTasks} 
+                                <span className="follow">Accomplishments</span>
+                            </span> 
+                        </div> 
+                        <div className=" d-flex mt-2"> 
+                            <button className="btn1 btn-dark">Edit Profile</button> 
+                        </div> 
+                        <div className='activities'>
+                            {activities.map(activity => <ActivityCard updateTotal={updateTotal} key={activity.taskID} id={activity.taskID}/>)}
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>}
+            <Card>
+                <CardBody className='text-center'>
                     <div>
                         <Button className="Home-form-button">
 							<Link to="/do-something">Bored?</Link>
@@ -66,12 +88,10 @@ const User = () =>{
                             {/* {badges.map(badge => <li key={badge.Id}>{badge.Id}</li>)} */}
                         </ul>
                     </div>
-                    <div className='activities'>
-                        {activities.map(activity => <ActivityCard updateTotal={updateTotal} key={activity.taskID} id={activity.taskID}/>)}
-                    </div>
-                </CardBody>}
-            </Card>}
-        </section>
+                    
+                </CardBody>
+            </Card>
+        </section> 
     );
 };
 
