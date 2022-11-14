@@ -16,12 +16,14 @@ const User = () =>{
     const [total, setTotal] = useState(0)
     const [badges, setBadges] = useState(0)
 
+    // Function for live updating total number of tasks completed POST request
     const updateTotal = function () {
         let num = total;
         num += 1;
         setTotal(num)
     }
 
+    // Similar to above function, but updates number of badges on a badge POST request
     const updateBadgeTotal = function () {
         let num = badges;
         num += 1;
@@ -54,7 +56,6 @@ const User = () =>{
     }, [username, currUser])
 
     return (
-        
         <section className='col-md-8 justify-content-center'>
             {notFound ? '404 user not found' :
             <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
@@ -75,9 +76,9 @@ const User = () =>{
                                 <Link to={`/badges/${username}`} className="follow">Badges</Link>
                             </span> 
                         </div> 
-                        <div className="d-flex mt-2"> 
+                        {/* <div className="d-flex mt-2"> 
                             <button className="btn1 btn-dark">Edit Profile</button> 
-                        </div> 
+                        </div>  */}
                         <div className='d-flex mt-2'>
                             <button className="btn1 btn-dark">
                                 <Link to="/do-something">Bored?</Link>
