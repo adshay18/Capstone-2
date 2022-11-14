@@ -14,11 +14,18 @@ const User = () =>{
     const [notFound, setNotFound] = useState(false)
     const [loading, setLoading] = useState(true)
     const [total, setTotal] = useState(0)
+    const [badges, setBadges] = useState(0)
 
     const updateTotal = function () {
         let num = total;
         num += 1;
         setTotal(num)
+    }
+
+    const updateBadgeTotal = function () {
+        let num = badges;
+        num += 1;
+        setBadges(num);
     }
 
     useEffect(()=>{
@@ -36,6 +43,7 @@ const User = () =>{
             setUserDetails(res.user)
             setActivities(temp)
             setTotal(res.user.completedTasks)
+            setBadges(res.user.badges.length)
             setLoading(false)
             } catch {
                 setNotFound(true)
@@ -47,11 +55,12 @@ const User = () =>{
 
     return (
         
-        <section className='col-md-8'>
+        <section className='col-md-8 justify-content-center'>
             {notFound ? '404 user not found' :
             <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
                 {loading ? <p>Loading...</p> :
                 <div className="card p-4"> 
+                {console.log(userDetails)}
                     <div className=" image d-flex flex-column justify-content-center align-items-center"> 
                         <button className="btn btn-secondary avatar-holder"> 
                             <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
@@ -59,38 +68,30 @@ const User = () =>{
                         <span className="name mt-3">{userDetails.firstName} {userDetails.lastName}</span> 
                         <span className="idd">@{userDetails.username}</span> 
                         <div className="d-flex flex-row justify-content-center align-items-center mt-3"> 
-                            <span className="number"> {userDetails.completedTasks} 
+                            <span className="number"> {total} 
                                 <span className="follow">Accomplishments</span>
                             </span> 
+                            <br></br>
+                            <span className="number"> {badges} 
+                                <span className="follow">Badges</span>
+                            </span> 
                         </div> 
-                        <div className=" d-flex mt-2"> 
+                        <div className="d-flex mt-2"> 
                             <button className="btn1 btn-dark">Edit Profile</button> 
                         </div> 
+                        <div className='d-flex mt-2'>
+                            <button className="btn1 btn-dark">
+                                <Link to="/do-something">Bored?</Link>
+                            </button>
+                        </div>
+                        <br></br>
                         <div className='activities'>
-                            {activities.map(activity => <ActivityCard updateTotal={updateTotal} key={activity.taskID} id={activity.taskID}/>)}
+                            {activities.map(activity => <ActivityCard tasks={total} updateBadgeTotal={updateBadgeTotal} updateTotal={updateTotal} key={activity.taskID} id={activity.taskID}/>)}
                         </div>
                     </div>
                 </div>
                 }
             </div>}
-            <Card>
-                <CardBody className='text-center'>
-                    <div>
-                        <Button className="Home-form-button">
-							<Link to="/do-something">Bored?</Link>
-						</Button>
-                    </div>
-                    <div>
-                        <h3>
-                            All time things done: {userDetails ? total : "Loading..."}
-                        </h3>
-                        <ul>
-                            {/* {badges.map(badge => <li key={badge.Id}>{badge.Id}</li>)} */}
-                        </ul>
-                    </div>
-                    
-                </CardBody>
-            </Card>
         </section> 
     );
 };

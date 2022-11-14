@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useContext, useState, useEffect } from 'react';
 import { Button, Card, CardBody, CardSubtitle } from 'reactstrap';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import BoredApi from './Api';
 import UserContext from './UserContext';
 
-const ActivityCard = ({id, updateTotal}) =>{
+const ActivityCard = ({id, updateTotal, updateBadgeTotal, tasks}) =>{
     const {currUser} = useContext(UserContext)
     let {username} = useParams();
     const [toDoList, setToDoList] = useState([])
@@ -15,6 +15,7 @@ const ActivityCard = ({id, updateTotal}) =>{
     const [loading, setLoading] = useState(true)
     const [match, setMatch] = useState(false)
     const [display, setDisplay] = useState(true)
+    const [badges, setBadges] = useState(currUser.badges)
 
    
     // Add activity to user's list of things to do
@@ -38,9 +39,23 @@ const ActivityCard = ({id, updateTotal}) =>{
         setDisplay(false)
     }
 
+    // Badge checking function
+    const checkBadge = async (username) => {
+        let currTasks = tasks;
+        let badgeIDs = [1, 5, 10, 20, 30, 50, 100, 101, 500, 1000]
+        for (let i = 0; i < badgeIDs.length; i++) {
+            if (currTasks === badgeIDs[i] - 1) {
+                await BoredApi.addBadge(username, badgeIDs[i])
+                setBadges([...badges, {badgeId: badgeIDs[i], username: currUser.username}])
+                updateBadgeTotal()
+            }
+        }
+    }
+
     // Mark a task as completed
     const done = async (username, id) => {
         await BoredApi.markComplete(username, id)
+        checkBadge(username)
         let temp = [...toDoList]
         for (let i = 0; i < toDoList.length; i++) {
             if(toDoList[i].taskID === id) {
