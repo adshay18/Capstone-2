@@ -1,7 +1,7 @@
 
 div.profile-container {
     width: 55vw;
-    background-color: rgba(99, 155, 211, 0.5);
+    background-color: none;
     border: none;
     cursor: pointer;
     transition: all 0.5s;
