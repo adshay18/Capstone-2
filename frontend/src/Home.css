@@ -19,6 +19,10 @@ section a:hover {
 
 h1.title {
 	font-size: 15vw;
+	text-shadow: 	4px 4px 0px rgb(192, 237, 255), 
+					2px 2px 0px rgb(192, 237, 255), 
+					3px 3px 0px rgb(192, 237, 255), 
+					1px 1px 0px rgb(192, 237, 255);
 }
 
 .card-title {
@@ -32,4 +36,8 @@ div.home-text {
 
 div.home-container {
 	width: 100%;
+}
+
+div.home-text p {
+	font-size: 2vw;
 }
