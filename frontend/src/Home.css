@@ -14,28 +14,20 @@ section a {
 }
 
 section a:hover {
-	color: #287eff;
+	color: rgb(121, 188, 255);
+}
+
+h1 {
+	font-size: 15vw;
 }
 
 .card-title {
 	font-size: 2rem;
 }
 
-
-.HomeSection {
-	background-color: rgb(221,221,221);
-}
-
-div.side-blue {
-	height: 100%;
-	width: 50%;
-	position: absolute;
-	margin-top: 0;
-	background-color: rgb(121, 188, 255);
-}
-
 div.home-text {
-	z-index: 999;
+	padding-top: 10vw;
+	color: white;
 }
 
 div.home-container {
