@@ -37,70 +37,75 @@ const SignupForm = () => {
 		
 
 	return (
-		<Card>
-			<CardTitle>Sign Up</CardTitle>
-			{errors ? <CardSubtitle>{errors}</CardSubtitle> : null}
-			<CardBody>
-				<Form onSubmit={handleSubmit}>
-					<FormGroup>
-						<Label htmlFor="username">Username</Label>
-						<Input
-							type="text"
-							id="username"
-							name="username"
-							value={formData.username}
-							onChange={handleChange}
-							required
-						/>
-					</FormGroup>
-					<FormGroup>
-						<Label htmlFor="username">Password</Label>
-						<Input
-							type="password"
-							id="password"
-							name="password"
-							value={formData.password}
-							onChange={handleChange}
-							required
-						/>
-					</FormGroup>
-					<FormGroup>
-						<Label htmlFor="first-name">First name</Label>
-						<Input
-							type="text"
-							id="first-name"
-							name="firstName"
-							value={formData.firstName}
-							onChange={handleChange}
-							required
-						/>
-					</FormGroup>
-					<FormGroup>
-						<Label htmlFor="last-name">Last name</Label>
-						<Input
-							type="text"
-							id="last-name"
-							name="lastName"
-							value={formData.lastName}
-							onChange={handleChange}
-							required
-						/>
-					</FormGroup>
-					<FormGroup>
-						<Label htmlFor="email">Email</Label>
-						<Input
-							type="email"
-							id="email"
-							name="email"
-							value={formData.email}
-							onChange={handleChange}
-							required
-						/>
-					</FormGroup>
-					<Button>Submit</Button>
-				</Form>
-			</CardBody>
-		</Card>
+		<section className='col-md-12'>
+			<div className="container mb-4 pt-5 d-flex justify-content-center">
+				<Card className='signup-form border-0 shadow'>
+					<CardTitle>Sign Up</CardTitle>
+					{errors ? <CardSubtitle>{errors}</CardSubtitle> : null}
+					<CardBody>
+						<Form onSubmit={handleSubmit}>
+							<FormGroup>
+								<Label htmlFor="username">Username</Label>
+								<Input
+									type="text"
+									id="username"
+									name="username"
+									value={formData.username}
+									onChange={handleChange}
+									required
+								/>
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="username">Password</Label>
+								<Input
+									type="password"
+									id="password"
+									name="password"
+									value={formData.password}
+									onChange={handleChange}
+									required
+								/>
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="first-name">First name</Label>
+								<Input
+									type="text"
+									id="first-name"
+									name="firstName"
+									value={formData.firstName}
+									onChange={handleChange}
+									required
+								/>
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="last-name">Last name</Label>
+								<Input
+									type="text"
+									id="last-name"
+									name="lastName"
+									value={formData.lastName}
+									onChange={handleChange}
+									required
+								/>
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="email">Email</Label>
+								<Input
+									type="email"
+									id="email"
+									name="email"
+									value={formData.email}
+									onChange={handleChange}
+									required
+								/>
+							</FormGroup>
+							<Button>Submit</Button>
+						</Form>
+					</CardBody>
+				</Card>
+			</div>
+		</section>
+		
 	);
 };
 

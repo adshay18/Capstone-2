@@ -1,3 +1,8 @@
-.card {
+.login-form {
 	padding: 10px;
+}
+
+div.card {
+	background-color: rgb(143, 199, 255);
+	color: white;
 }

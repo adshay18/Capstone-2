@@ -40,38 +40,42 @@ const LoginForm = () => {
 		}));
 	};
 	return (
-		<Card>
-			<CardTitle>Log In</CardTitle>
-			{errors ? <CardSubtitle>{errors}</CardSubtitle> : null}
-			<CardBody>
-				<Form onSubmit={handleSubmit}>
-					<FormGroup>
-						<Label htmlFor="username">Username</Label>
-						<Input
-							type="text"
-							id="username"
-							name="username"
-							value={formData.username}
-							onChange={handleChange}
-							required
-						/>
-					</FormGroup>
-					<FormGroup>
-						<Label htmlFor="username">Password</Label>
-						<Input
-							type="password"
-							id="password"
-							name="password"
-							value={formData.password}
-							onChange={handleChange}
-							required
-						/>
-					</FormGroup>
-
-					<Button>Submit</Button>
-				</Form>
-			</CardBody>
-		</Card>
+		<section className='col-md-12'>
+			 <div className="container mb-4 pt-5 d-flex justify-content-center">
+				<Card className="login-form shadow border-0">
+					<CardTitle>Log In</CardTitle>
+					{errors ? <CardSubtitle>{errors}</CardSubtitle> : null}
+					<CardBody>
+						<Form onSubmit={handleSubmit}>
+							<FormGroup>
+								<Label htmlFor="username">Username</Label>
+								<Input
+									type="text"
+									id="username"
+									name="username"
+									value={formData.username}
+									onChange={handleChange}
+									required
+								/>
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="username">Password</Label>
+								<Input
+									type="password"
+									id="password"
+									name="password"
+									value={formData.password}
+									onChange={handleChange}
+									required
+								/>
+							</FormGroup>
+							<Button>Submit</Button>
+						</Form>
+					</CardBody>
+				</Card>
+			 </div>
+			
+		</section>
 	);
 };
 
