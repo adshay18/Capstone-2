@@ -7,27 +7,27 @@ import './Home.css';
 const Home = () => {
 	const { currUser } = useContext(UserContext);
 	return (
-		<section className="col-md-8">
-			<Card>
-				<CardBody className="text-center">
-					<CardTitle className="font-weight-bold">
-						<b>Bored?</b>
-					</CardTitle>
-					<span>Not anymore.</span>
-					{currUser.username ? (
-						<h2>Welcome back, {currUser.firstName}!</h2>
-					) : (
-						<div>
-							<Button className="Home-form-button">
-								<Link to="login">Log in</Link>
-							</Button>
-							<Button className="Home-form-button">
-								<Link to="/signup">Sign up</Link>
-							</Button>
-						</div>
-					)}
-				</CardBody>
-			</Card>
+		<section className="col-md-12">
+			
+			<div className='home-container'>
+				<div className='side-blue'></div>
+				<div className='home-text'>
+					<h1>BO</h1>
+					<h1>RED?</h1>
+				</div>
+				{currUser.username ? 
+				<h4>Welcome back, {currUser.firstName}.</h4> :
+				<div>
+					<Button className="Home-form-button">
+						<Link to="login">Log in</Link>
+					</Button>
+					<Button className="Home-form-button">
+						<Link to="/signup">Sign up</Link>
+					</Button>
+				</div>
+				}
+			</div>
+			
 		</section>
 	);
 }

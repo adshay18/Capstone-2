@@ -4,6 +4,10 @@
 	margin-top: 10px;
 }
 
+section {
+	width: 100%;
+}
+
 section a {
 	text-decoration: none;
 	color: white;
@@ -15,4 +19,25 @@ section a:hover {
 
 .card-title {
 	font-size: 2rem;
+}
+
+
+.HomeSection {
+	background-color: rgb(221,221,221);
+}
+
+div.side-blue {
+	height: 100%;
+	width: 50%;
+	position: absolute;
+	margin-top: 0;
+	background-color: rgb(121, 188, 255);
+}
+
+div.home-text {
+	z-index: 999;
+}
+
+div.home-container {
+	width: 100%;
 }

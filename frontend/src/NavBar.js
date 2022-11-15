@@ -19,7 +19,7 @@ function NavBar() {
 							<NavLink to="/do-something">Do Something</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink to={`/users/${currUser.username}`}>{currUser.username}</NavLink>
+							<NavLink to={`/users/${currUser.username}`}>@{currUser.username}</NavLink>
 						</NavItem>
 						<Button onClick={logout}>logout</Button>
 					</Nav>
