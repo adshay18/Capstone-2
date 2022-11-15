@@ -23,18 +23,18 @@ const Home = () => {
 							<p>No more.</p>
 						</div>}
 					{currUser.username ? 
-				<h4>Welcome back, {currUser.firstName}.</h4> :
-				<div>
-					<Button className="Home-form-button">
-						<Link to="login">Log in</Link>
-					</Button>
-					<Button className="Home-form-button">
-						<Link to="/signup">Sign up</Link>
-					</Button>
-				</div>
+					<h4>Welcome back, {currUser.firstName}.</h4> :
+					<div>
+						<Button className="Home-form-button">
+							<Link to="login">Log in</Link>
+						</Button>
+						<Button className="Home-form-button">
+							<Link to="/signup">Sign up</Link>
+						</Button>
+					</div>
 				}
-			</div>
 				</div>
+			</div>
 				
 			
 		</section>
