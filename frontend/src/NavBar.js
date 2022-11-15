@@ -22,7 +22,7 @@ function NavBar() {
 						<NavItem>
 							<NavLink to={`/users/${currUser.username}`}>@{currUser.username}</NavLink>
 						</NavItem>
-						<Button onClick={logout}><Link exact to="/">logout</Link></Button>
+						<Link exact to="/"><Button onClick={logout} className="shadow">logout</Button></Link>
 					</Nav>
 				) : (
 					<Nav className="ml-auto" navbar>

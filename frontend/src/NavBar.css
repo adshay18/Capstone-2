@@ -14,6 +14,10 @@ nav a {
 	display: inline;
 }
 
+nav a.logout {
+	color: white;
+}
+
 nav a.active {
 	color: #287eff;
 	font-weight: bold;

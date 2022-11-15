@@ -56,9 +56,9 @@ const User = () =>{
     }, [username, currUser])
 
     return (
-        <section className='col-md-8 justify-content-center'>
+        <section className='col-md-12 justify-content-center'>
             {notFound ? '404 user not found' :
-            <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
+            <div className="container mb-4 pt-5 d-flex justify-content-center">
                 {loading ? <p>Loading...</p> :
                 <div className="card p-4"> 
                     <div className=" image d-flex flex-column justify-content-center align-items-center"> 
