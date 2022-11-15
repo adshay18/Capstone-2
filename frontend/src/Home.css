@@ -17,7 +17,7 @@ section a:hover {
 	color: rgb(121, 188, 255);
 }
 
-h1 {
+h1.title {
 	font-size: 15vw;
 }
 

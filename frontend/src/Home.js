@@ -13,13 +13,13 @@ const Home = () => {
 				<div className='home-text'>
 					{currUser.username ? 
 						<div>
-							<h1>BORED?</h1>
+							<h1 className="title">BORED?</h1>
 							<p>...again?</p>
 						</div>	
 						
 						: 
 						<div>
-							<h1>BORED?</h1>
+							<h1 className="title">BORED?</h1>
 							<p>No more.</p>
 						</div>}
 					{currUser.username ? 
