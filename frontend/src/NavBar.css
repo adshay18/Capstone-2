@@ -43,9 +43,18 @@ nav a:not(.navbar-brand):hover {
 }
 
 .navbar-nav {
-	margin-right: 20px;
+	margin-right: 200px;
 }
 
 .navbar-brand {
 	margin-left: 10px;
+}
+
+.navbar-collapse {
+	justify-content: right;
+	margin-right: 0;
+}
+
+ul.navbar-nav {
+	margin-right: 0;
 }
