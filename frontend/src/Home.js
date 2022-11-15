@@ -25,10 +25,10 @@ const Home = () => {
 					{currUser.username ? 
 					<h4>Welcome back, {currUser.firstName}.</h4> :
 					<div>
-						<Button className="Home-form-button">
+						<Button className="Home-form-button shadow">
 							<Link to="login">Log in</Link>
 						</Button>
-						<Button className="Home-form-button">
+						<Button className="Home-form-button shadow">
 							<Link to="/signup">Sign up</Link>
 						</Button>
 					</div>
