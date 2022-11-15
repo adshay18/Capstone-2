@@ -60,9 +60,9 @@ const User = () =>{
             {notFound ? '404 user not found' :
             <div className="container mb-4 pt-5 d-flex justify-content-center">
                 {loading ? <p>Loading...</p> :
-                <div className="card p-4"> 
+                <div className="profile-container card p-4 border-0"> 
                     <div className=" image d-flex flex-column justify-content-center align-items-center"> 
-                        <button className="btn btn-secondary avatar-holder"> 
+                        <button className="btn btn-secondary avatar-holder shadow"> 
                             <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
                         </button> 
                         <span className="name mt-3">{userDetails.firstName} {userDetails.lastName}</span> 
@@ -80,7 +80,7 @@ const User = () =>{
                             <button className="btn1 btn-dark">Edit Profile</button> 
                         </div>  */}
                         <div className='d-flex mt-2'>
-                            <button className="btn1 btn-dark">
+                            <button className="btn1 btn-dark shadow">
                                 <Link to="/do-something">Bored?</Link>
                             </button>
                         </div>

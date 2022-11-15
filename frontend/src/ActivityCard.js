@@ -107,7 +107,7 @@ const ActivityCard = ({id, updateTotal, updateBadgeTotal, tasks}) =>{
         return(
             <section>
                 {display ? 
-                    <Card className="card activity-link">
+                    <Card className="card activity-link border-0 mb-2 shadow-sm">
                         {loading ? <p>Loading...</p> : 
                         <CardBody>
                         <CardSubtitle>{err? 'Oops! Something went wrong' : text}</CardSubtitle>
@@ -116,9 +116,9 @@ const ActivityCard = ({id, updateTotal, updateBadgeTotal, tasks}) =>{
                                     (<Button onClick={() => add(currUser.username, id)}>Add</Button>)
                                 )
                             }
-                            {match ? (<Button onClick={() => done(currUser.username, id)}>Done</Button>)
+                            {match ? (<Button className="bg-success user-button done" onClick={() => done(currUser.username, id)}>Done</Button>)
                             : null}
-                            {match ? (<Button onClick={() => remove(currUser.username, id)}>Delete</Button>)
+                            {match ? (<Button className="bg-danger user-button" onClick={() => remove(currUser.username, id)}>Delete</Button>)
                             : null}
                         </CardBody>
                         }

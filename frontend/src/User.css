@@ -1,7 +1,7 @@
 
-.card {
+div.profile-container {
     width: 55vw;
-    background-color: #efefef;
+    background-color: rgba(99, 155, 211, 0.5);
     border: none;
     cursor: pointer;
     transition: all 0.5s;
@@ -15,7 +15,7 @@
     transform: scale(1.5)
 }
 
-.avatar-holder {
+button.avatar-holder {
     height: 140px;
     width: 140px;
     border-radius: 50%
@@ -28,22 +28,24 @@
 
 .idd {
     font-size: 14px;
-    font-weight: 600
+    font-weight: 600;
 }
 
 .idd1 {
-    font-size: 12px
+    font-size: 12px;
 }
 
 .number {
     font-size: 22px;
-    font-weight: bold
+    font-weight: bold;
+    margin-right: 10px;
 }
 
 .follow {
     font-size: 12px;
     font-weight: 500;
-    color: #444444
+    color: #444444;
+    margin-left: 3px;
 }
 
 .btn1 {
@@ -61,20 +63,20 @@
     font-weight: 500
 }
 
-.icons i {
-    font-size: 19px
+span a:hover {
+    text-decoration: underline;
+    color: white;
 }
 
-hr .new1 {
-    border: 1px solid
+div.activity-link {
+    background-color:rgba(121, 188, 255, 0.6);
 }
 
-.join {
-    font-size: 14px;
-    color: #a0a0a0;
-    font-weight: bold
+.user-button {
+    margin: 10px;
+    margin-bottom: 0;
 }
 
-.date {
-    background-color: #ccc
+.done {
+    background-color: green;
 }
