@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import './NavBar.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem, Button } from 'reactstrap';
 import UserContext from './UserContext';
 
 function NavBar() {
 	const { currUser, logout } = useContext(UserContext);
+
 	return (
 		<div>
 			<Navbar expand="md">
@@ -21,7 +22,7 @@ function NavBar() {
 						<NavItem>
 							<NavLink to={`/users/${currUser.username}`}>@{currUser.username}</NavLink>
 						</NavItem>
-						<Button onClick={logout}>logout</Button>
+						<Button onClick={logout}><Link exact to="/">logout</Link></Button>
 					</Nav>
 				) : (
 					<Nav className="ml-auto" navbar>
