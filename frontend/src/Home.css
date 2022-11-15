@@ -40,4 +40,5 @@ div.home-container {
 
 div.home-text p {
 	font-size: 2vw;
+	text-shadow: 1px 1px 0px rgb(192, 237, 255);
 }
