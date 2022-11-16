@@ -6,7 +6,7 @@ import './SignupForm.css';
 import BoredApi from './Api';
 
 const SignupForm = () => {
-	const INIT = { username: '', password: '', firstName: '', lastName: '', email: ''};
+	const INIT = { firstName: '', lastName: '', email: '',username: '', password: ''};
 	const [ formData, setFormData ] = useState(INIT);
 	const history = useHistory();
 	const { login, signup } = useContext(UserContext);
@@ -45,28 +45,6 @@ const SignupForm = () => {
 					<CardBody>
 						<Form onSubmit={handleSubmit}>
 							<FormGroup>
-								<Label htmlFor="username">Username</Label>
-								<Input
-									type="text"
-									id="username"
-									name="username"
-									value={formData.username}
-									onChange={handleChange}
-									required
-								/>
-							</FormGroup>
-							<FormGroup>
-								<Label htmlFor="username">Password</Label>
-								<Input
-									type="password"
-									id="password"
-									name="password"
-									value={formData.password}
-									onChange={handleChange}
-									required
-								/>
-							</FormGroup>
-							<FormGroup>
 								<Label htmlFor="first-name">First name</Label>
 								<Input
 									type="text"
@@ -95,6 +73,28 @@ const SignupForm = () => {
 									id="email"
 									name="email"
 									value={formData.email}
+									onChange={handleChange}
+									required
+								/>
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="username">Username</Label>
+								<Input
+									type="text"
+									id="username"
+									name="username"
+									value={formData.username}
+									onChange={handleChange}
+									required
+								/>
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="username">Password</Label>
+								<Input
+									type="password"
+									id="password"
+									name="password"
+									value={formData.password}
 									onChange={handleChange}
 									required
 								/>
