@@ -19,7 +19,7 @@ const router = express.Router();
  router.get('/', async function(req, res, next) {
 	try {
 		let leaderboard = await User.getLeaderboard();
-		return leaderboard;
+		return res.json({leaderboard})
 	} catch (err) {
 		return next(err)
 	}

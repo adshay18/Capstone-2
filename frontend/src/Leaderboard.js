@@ -14,7 +14,7 @@ const Leaderboard = () => {
             const getLeaderboard = async () => {
                 let res = await BoredApi.getLeaderboard();
                 console.log(res)
-                setLeaderboard(res)
+                setLeaderboard(res.leaderboard)
             }
             getLeaderboard();
         }, [currUser]
@@ -22,7 +22,10 @@ const Leaderboard = () => {
 
     return (
         <section className='col-md-12 justify-content-center'>
-            {leaderboard.map(user => <span>{user.username}</span>)}
+            <ul>
+            {leaderboard.map(user => <li>{user.username}</li>)}
+
+            </ul>
         </section>
     )
 }
