@@ -22,7 +22,10 @@ function NavBar() {
 					{currUser.username ? (
 						<Nav navbar>
 							<NavItem>
-								<NavLink to="/do-something">Do Something</NavLink>
+								<NavLink to="/leaderboard">Leaderboard</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink to="/do-something">Activities</NavLink>
 							</NavItem>
 							<NavItem>
 								<NavLink to={`/users/${currUser.username}`}>@{currUser.username}</NavLink>

@@ -8,6 +8,7 @@ import User from './User';
 import ActivityForm from './ActivityForm';
 import BadgePage from './BadgePage';
 import EditForm from './EditForm';
+import Leaderboard from './Leaderboard';
 
 const Routes = () => {
 	return (
@@ -35,6 +36,9 @@ const Routes = () => {
 					</Route>
 					<Route exact path="/do-something">
 						<ActivityForm />
+					</Route>
+					<Route exact path="/leaderboard">
+						<Leaderboard />
 					</Route>
 					<Route>
 						<p>404 page not found</p>

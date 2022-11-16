@@ -69,7 +69,6 @@ router.post('/token', async function(req, res, next) {
 /** GET /[username] => { user }
  *
  * Returns { username, firstName, lastName, email, age, completedTasks, avatar }
- *   where completedTasks is { ... FILL THIS IN }
  *
  * Authorization required: none
  **/
@@ -84,6 +83,7 @@ router.get('/:username', async function(req, res, next) {
 		return next(err);
 	}
 });
+
 
 /** PATCH /[username] { user } => { user }
  *

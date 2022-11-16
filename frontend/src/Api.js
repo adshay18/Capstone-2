@@ -62,6 +62,14 @@ class BoredApi {
 		return res;
 	}
 
+	// Get user leaderboard
+
+	static async getLeaderboard() {
+		let res = await this.request('leaderboard')
+		console.log('****************')
+		return res;
+	}
+
 	//  --------------  Task Routes ------------------
 
 	// Give a user a task

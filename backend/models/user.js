@@ -88,6 +88,19 @@ class User {
 		return user;
 	}
 
+	// Get's list of users in order for leaderboard
+	// returns [{user1}, {user2}, {user3}...]
+
+	static async getLeaderboard() {
+		const rankingRes = await db.query(
+			`SELECT username, completed_tasks AS "completedTasks", avatar
+			FROM users
+			ORDER BY completed_tasks DESC`
+		);
+
+		return rankingRes.rows;
+	}
+
 	// Update user with data
 	// Does not need to be a complete update
 	// Data can include {firstName, lastName, password, email, age, avatar, completedTasks}
