@@ -1,3 +1,11 @@
 .card {
 	padding: 10px;
 }
+div.activity-link {
+    background-color:rgba(189, 222, 255, 0.3);
+	border: none;
+}
+
+div.results {
+	width: 33vw;
+}
