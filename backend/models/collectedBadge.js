@@ -37,7 +37,7 @@ class CollectedBadge {
 		const userCheck = await db.query(`SELECT * FROM users WHERE username = $1`, [ username ]);
 		if (!userCheck.rows[0]) throw new NotFoundError('Username not found');
 
-		const result = await db.query(
+		const res1 = await db.query(
 			`
         SELECT badge_id AS "badgeId", username FROM collected_badges
         WHERE username = $1
@@ -45,7 +45,26 @@ class CollectedBadge {
 			[ username ]
 		);
 
-		return result.rows;
+		let userBadgeIDs = res1.rows;
+
+		const res2 = await db.query(
+			`
+			SELECT * FROM badges`
+		)
+
+		let availableBadges = res2.rows;
+
+		const userBadgeDetails = [];
+
+		for (let i = 0; i < userBadgeIDs.length; i++) {
+			for (let j = 0; j < availableBadges.length; j++) {
+				if (userBadgeIDs[i].badgeId === availableBadges[j].badge_id) {
+					userBadgeDetails.push({badgeId: availableBadges[j].badge_id, unlockNum: availableBadges[j].unlock_num, message: availableBadges[j].message})
+				}
+			}
+		}
+
+		return userBadgeDetails;
 	}
 }
 
