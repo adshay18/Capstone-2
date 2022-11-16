@@ -34,15 +34,15 @@ div.number1000{
 div.badge {
     border-radius: 50%;
     border-style: solid;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     margin: 20px;
     border-width: thick;
     background-color: white;
 }
 
 span.value {
-    line-height: 75px;
+    line-height: 125px;
     vertical-align: middle;
     font-size: 35px;
     text-shadow: 2px 2px gray;
@@ -52,4 +52,8 @@ span.value {
 div.badge:hover {
     background-color: rgb(219, 221, 212);
     cursor: pointer;
+}
+
+h1 a:hover {
+    color: rgb(157, 217, 255);
 }

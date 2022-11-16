@@ -29,7 +29,7 @@ const BadgePage = () => {
     return (
         <section className='col-md-12 justify-content-center'>
             <div className="page-container">
-                <h1>@{username}'s badges</h1>
+                <h1><Link to={`/users/${username}`}>@{username}'s</Link> badges</h1>
                 {loading ? 'Loading...' : 
                     <div>
                         {badges.map(badge => 
