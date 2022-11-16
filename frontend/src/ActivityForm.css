@@ -8,4 +8,5 @@ div.activity-link {
 
 div.results {
 	width: 33vw;
+	min-width: 300px;
 }

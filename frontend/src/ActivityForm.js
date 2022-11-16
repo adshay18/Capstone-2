@@ -112,10 +112,9 @@ const ActivityForm = () => {
                         <Button className="shadow" onClick={handleClick}>Random</Button>
                     </CardBody>
                 </Card>
-                
             </div>
             {submitted ? 
-                    <div className='border-0 rounded results container mb-4 pt-5 d-flex justify-content-center'>
+                    <div className='border-0 rounded results container mb-4 pt-3 d-flex justify-content-center'>
                     {results.error ? <p>"Oops! Try different filters or a random activity"</p> : <ActivityCard id={+results.key} key={results.key}/>}
                     </div>
                 : null}
