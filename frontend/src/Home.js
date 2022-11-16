@@ -8,7 +8,6 @@ const Home = () => {
 	const { currUser } = useContext(UserContext);
 	return (
 		<section className="col-md-12">
-			
 			<div className='home-container'>
 				<div className='home-text'>
 					{currUser.username ? 
@@ -34,6 +33,11 @@ const Home = () => {
 					</div>
 				}
 				</div>
+			</div>
+			<div className='footer-container justify-content-center'>
+				<p>Created by Andrew Shay</p>
+				<a href="https://www.linkedin.com/in/andrewdshay/" target="_blank">LinkedIn </a>
+				<a href="https://github.com/adshay18" target="_blank"> GitHub</a>
 			</div>
 				
 			
