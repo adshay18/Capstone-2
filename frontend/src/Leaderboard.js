@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Card, CardBody, CardTitle, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import BoredApi from './Api';
 import UserContext from './UserContext';
 
@@ -12,13 +11,12 @@ const Leaderboard = () => {
 
     useEffect(
         () => {
-            async function getLeaderboard() {
+            const getLeaderboard = async () => {
                 let res = await BoredApi.getLeaderboard();
                 console.log(res)
                 setLeaderboard(res)
             }
             getLeaderboard();
-            console.log(leaderboard)
         }, [currUser]
     )
 

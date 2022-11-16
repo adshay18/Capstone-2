@@ -1,7 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Form, FormGroup, Label, Input, Button, Card, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
-import UserContext from './UserContext';
+import React, { useState} from 'react';
+import { Form, FormGroup, Label, Button, Card, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 import './ActivityForm.css';
 import axios from 'axios';
 import ActivityCard from './ActivityCard';

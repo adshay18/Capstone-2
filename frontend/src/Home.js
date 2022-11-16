@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Card, CardBody, CardTitle, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import UserContext from './UserContext';
 import './Home.css';
@@ -36,8 +36,8 @@ const Home = () => {
 			</div>
 			<div className='footer-container justify-content-center'>
 				<p>Created by Andrew Shay</p>
-				<a href="https://www.linkedin.com/in/andrewdshay/" target="_blank">LinkedIn </a>
-				<a href="https://github.com/adshay18" target="_blank"> GitHub</a>
+				<a href="https://www.linkedin.com/in/andrewdshay/" target="_blank" rel="noreferrer">LinkedIn </a>
+				<a href="https://github.com/adshay18" target="_blank" rel="noreferrer"> GitHub</a>
 			</div>
 				
 			

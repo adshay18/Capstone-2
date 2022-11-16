@@ -23,7 +23,7 @@ const BadgePage = () => {
                 setLoading(false)
             }
             getBadges(username)
-        }, [username]
+        }, [username, currUser]
     )
     
     return (

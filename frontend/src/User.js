@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Card, CardBody, CardTitle, Button } from 'reactstrap';
 import { Link, useParams } from 'react-router-dom';
 import BoredApi from './Api';
 import UserContext from './UserContext';
@@ -63,7 +62,7 @@ const User = () =>{
                 <div className="profile-container card p-4 border-0"> 
                     <div className=" image d-flex flex-column justify-content-center align-items-center"> 
                         <button className="btn btn-secondary avatar-holder shadow"> 
-                            <img src={userDetails.avatar ? userDetails.avatar : "https://i.imgur.com/wvxPV9S.png"} height="100" width="100" />
+                            <img src={userDetails.avatar ? userDetails.avatar : "https://i.imgur.com/wvxPV9S.png"} alt="User Avatar" height="100" width="100" />
                         </button> 
                         <span className="name mt-3">{userDetails.firstName} {userDetails.lastName}</span> 
                         <span className="idd">@{userDetails.username}</span> 
