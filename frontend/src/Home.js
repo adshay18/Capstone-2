@@ -7,7 +7,7 @@ import './Home.css';
 const Home = () => {
 	const { currUser } = useContext(UserContext);
 	return (
-		<section className="col-md-12">
+		<section className="col-md-12 home-section">
 			<div className='home-container'>
 				<div className='home-text'>
 					{currUser.username ? 
