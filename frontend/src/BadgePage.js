@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import BoredApi from './Api';
 import UserContext from './UserContext';
+import './BadgePage.css'
 
 
 const BadgePage = () => {
@@ -22,13 +23,19 @@ const BadgePage = () => {
     )
     
     return (
-        <section className='col-md-8 justify-content-center'>
-            <div>
-                <h1>{username}</h1>
+        <section className='col-md-12 justify-content-center'>
+            <div className="page-container">
+                <h1>@{username}'s badges</h1>
                 {loading ? 'Loading...' : 
-                <ul>
-                    {badges.map(badge => <li key={badge.badgeId}>{badge.badgeId}</li>)}
-                </ul>}
+                    <div>
+                        {badges.map(badge => 
+                            <div className={`shadow badge number${badge.badgeId}`}>
+                                <span className={`number${badge.badgeId}`} key={badge.badgeId}>
+                                    {badge.badgeId}
+                                </span>
+                            </div>)}
+                    </div>
+                }
             </div>
         </section>
     )

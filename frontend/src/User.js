@@ -86,7 +86,7 @@ const User = () =>{
                         </div>
                         <br></br>
                         <div className='activities'>
-                            {activities.map(activity => <ActivityCard tasks={total} updateBadgeTotal={updateBadgeTotal} updateTotal={updateTotal} key={activity.taskID} id={activity.taskID}/>)}
+                            {activities.map(activity => <ActivityCard tasks={total}  badges={badges} updateBadgeTotal={updateBadgeTotal} updateTotal={updateTotal} key={activity.taskID} id={activity.taskID}/>)}
                         </div>
                     </div>
                 </div>

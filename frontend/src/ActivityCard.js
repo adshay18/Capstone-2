@@ -45,7 +45,7 @@ const ActivityCard = ({id, updateTotal, updateBadgeTotal, tasks}) =>{
         let badgeIDs = [1, 5, 10, 20, 30, 50, 100, 101, 500, 1000]
         for (let i = 0; i < badgeIDs.length; i++) {
             if (currTasks === badgeIDs[i] - 1) {
-                await BoredApi.addBadge(username, badgeIDs[i])
+                await BoredApi.addBadge(username, i + 1)
                 setBadges([...badges, {badgeId: badgeIDs[i], username: currUser.username}])
                 updateBadgeTotal()
             }

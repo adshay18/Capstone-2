@@ -1,0 +1,42 @@
+div.page-container {
+    padding-top: 20vh;
+}
+
+h1 {
+    color: white;
+}
+
+div.number1, div.number5, div.number10 {
+    color: rgb(205, 127, 50);
+    border-color: rgb(205, 127, 50);
+}
+
+div.number20, div.number30, div.number50 {
+    color: silver;
+    border-color: silver;
+}
+
+div.number100, div.number500 {
+    color: gold;
+    border-color: gold;
+}
+
+div.number101{
+    color: black;
+    border-color: black;
+}
+
+div.number1000{
+    color: #b9f2ff;
+    border-color: #b9f2ff;
+}
+
+div.badge {
+    border-radius: 50%;
+    border-style: solid;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    border-width: thick;
+    background-color: rgb(170, 167, 165);
+}
