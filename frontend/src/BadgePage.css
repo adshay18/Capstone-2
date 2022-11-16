@@ -38,5 +38,18 @@ div.badge {
     height: 100px;
     margin: 20px;
     border-width: thick;
-    background-color: rgb(170, 167, 165);
+    background-color: white;
+}
+
+span.value {
+    line-height: 75px;
+    vertical-align: middle;
+    font-size: 35px;
+    text-shadow: 2px 2px gray;
+
+}
+
+div.badge:hover {
+    background-color: rgb(219, 221, 212);
+    cursor: pointer;
 }

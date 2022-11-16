@@ -11,6 +11,10 @@ const BadgePage = () => {
     const [badges, setBadges] = useState([])
     const [loading, setLoading] = useState(true)
 
+    const displayMessage = (message) => {
+        alert(message)
+    }
+
     useEffect(
         () =>{
             async function getBadges(username) {
@@ -29,9 +33,9 @@ const BadgePage = () => {
                 {loading ? 'Loading...' : 
                     <div>
                         {badges.map(badge => 
-                            <div className={`shadow badge number${badge.badgeId}`}>
-                                <span className={`number${badge.badgeId}`} key={badge.badgeId}>
-                                    {badge.badgeId}
+                            <div onClick={() => displayMessage(badge.message)} className={`shadow badge number${badge.unlockNum}`} key={badge.badgeId}>
+                                <span className={`value number${badge.badgeId}`}>
+                                    {badge.unlockNum}
                                 </span>
                             </div>)}
                     </div>
