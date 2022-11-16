@@ -7,6 +7,7 @@ import Home from './Home'
 import User from './User';
 import ActivityForm from './ActivityForm';
 import BadgePage from './BadgePage';
+import EditForm from './EditForm';
 
 const Routes = () => {
 	return (
@@ -28,6 +29,9 @@ const Routes = () => {
 					</Route>
 					<Route path="/badges/:username">
 						<BadgePage />
+					</Route>
+					<Route path="/edit/:username">
+						<EditForm />
 					</Route>
 					<Route exact path="/do-something">
 						<ActivityForm />

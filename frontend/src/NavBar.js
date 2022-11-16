@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import './NavBar.css';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Navbar, Nav, NavItem, Button } from 'reactstrap';
 import UserContext from './UserContext';
 
 function NavBar() {
 	const { currUser, logout } = useContext(UserContext);
+	const location = useLocation()
 
 	return (
 		<div>
@@ -26,12 +27,16 @@ function NavBar() {
 							<NavItem>
 								<NavLink to={`/users/${currUser.username}`}>@{currUser.username}</NavLink>
 							</NavItem>
+							{currUser.username && location.pathname === `/users/${currUser.username}` ? 
+							<NavItem>
+								<NavLink exact to={`/edit/${currUser.username}`}>Edit</NavLink>
+							</NavItem>
+							: null}
 							<NavItem>
 								<NavLink exact to="/">
 									<Button onClick={logout} className="shadow">logout</Button>
 								</NavLink>
 							</NavItem>
-							
 						</Nav>
 					) : (
 						<Nav className="ml-auto" navbar>
