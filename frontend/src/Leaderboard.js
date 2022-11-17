@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
 import BoredApi from './Api';
+import UserRow from './UserRow';
 import UserContext from './UserContext';
-
+import './Leaderboard.css'
 
 const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState([])
@@ -13,7 +13,6 @@ const Leaderboard = () => {
         () => {
             const getLeaderboard = async () => {
                 let res = await BoredApi.getLeaderboard();
-                console.log(res)
                 setLeaderboard(res.leaderboard)
             }
             getLeaderboard();
@@ -22,10 +21,17 @@ const Leaderboard = () => {
 
     return (
         <section className='col-md-12 justify-content-center'>
-            <ul>
-            {leaderboard.map(user => <li>{user.username}</li>)}
-
-            </ul>
+            <table className='rounded-top'>
+                <thead>
+                    <tr>
+                        <th>Total</th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {leaderboard.map(user => <UserRow key={user.username} username={user.username} avatar={user.avatar} tasks={user.completedTasks}/>)}
+                </tbody>
+            </table>
         </section>
     )
 }

@@ -66,7 +66,6 @@ class BoredApi {
 
 	static async getLeaderboard() {
 		let res = await this.request('leaderboard')
-		console.log('****************')
 		return res;
 	}
 
