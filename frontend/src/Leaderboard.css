@@ -35,8 +35,7 @@ tbody tr:nth-of-type(even) a {
 }
 
 tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
-    font-weight: bold;
+    border-bottom: 8px solid #009879;
     color: #ffffff;
 }
 
@@ -47,4 +46,8 @@ tr:hover {
 tr:nth-of-type(even):hover {
     background-color: #009879;
     color: #ffffff
+}
+
+td img {
+    margin-right: 10px;
 }
