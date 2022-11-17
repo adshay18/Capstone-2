@@ -58,3 +58,13 @@ nav a:not(.navbar-brand):hover {
 ul.navbar-nav {
 	margin-right: 0;
 }
+
+div.show {
+	display: flex;
+	justify-content: end;
+}
+
+div.collapsing {
+	display: flex;
+	justify-content: end;
+}
