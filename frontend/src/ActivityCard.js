@@ -6,6 +6,7 @@ import BoredApi from './Api';
 import UserContext from './UserContext';
 
 const ActivityCard = ({id, updateTotal, updateBadgeTotal, tasks}) =>{
+    // Grab initial data and set up pieces of state
     const {currUser} = useContext(UserContext)
     let {username} = useParams();
     const [toDoList, setToDoList] = useState([])

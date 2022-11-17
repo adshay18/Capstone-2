@@ -5,7 +5,9 @@ import UserContext from './UserContext';
 import './Home.css';
 
 const Home = () => {
+	// Grab current user from Context
 	const { currUser } = useContext(UserContext);
+	
 	return (
 		<section className="col-md-12 home-section">
 			<div className='home-container'>

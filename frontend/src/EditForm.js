@@ -6,23 +6,26 @@ import './SignupForm.css';
 import BoredApi from './Api';
 
 const EditForm = () => {
+
     const {currUser} = useContext(UserContext)
 	const history = useHistory();
     const {username} = useParams();
 	const [ errors, setErrors ] = useState([]);
-    const [INIT, setINIT] = useState({firstName: '', lastName: '', email: '', avatar: ''})
+    const INIT = {firstName: '', lastName: '', email: '', avatar: ''}
 	const [ formData, setFormData ] = useState(INIT);
 
+	// Update user and send back to user profile page on form submission
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			let res = await BoredApi.updateUser(username, formData)
-            console.log(res)
+			await BoredApi.updateUser(username, formData)
+			history.push(`/users/${username}`)
 		} catch (err) {
 			setErrors(err);
 		}
 	};
 
+	// Control inputs when user types
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((data)=> ({

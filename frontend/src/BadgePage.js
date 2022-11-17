@@ -6,11 +6,13 @@ import './BadgePage.css'
 
 
 const BadgePage = () => {
+    // Set state for page
     const {currUser} = useContext(UserContext)
     const {username} = useParams();
     const [badges, setBadges] = useState([])
     const [loading, setLoading] = useState(true)
 
+    // Show message for each badge when the badge is clicked on
     const displayMessage = (message) => {
         alert(message)
     }

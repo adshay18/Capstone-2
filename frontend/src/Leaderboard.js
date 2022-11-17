@@ -5,9 +5,9 @@ import UserContext from './UserContext';
 import './Leaderboard.css'
 
 const Leaderboard = () => {
+    // Grab state for leaderboard
     const [leaderboard, setLeaderboard] = useState([])
     const { currUser } = useContext(UserContext)
-
 
     useEffect(
         () => {

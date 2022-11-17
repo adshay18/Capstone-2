@@ -6,17 +6,20 @@ import './LoginForm.css';
 import BoredApi from './Api';
 
 const LoginForm = () => {
+	// Set initial form state
 	const { login } = useContext(UserContext);
 	const INIT = { username: '', password: '' };
 	const [ formData, setFormData ] = useState(INIT);
 	const history = useHistory();
 	const [ errors, setErrors ] = useState([]);
 
+	// Verify user exists and entered correct info
 	async function auth(info) {
 		let res = await BoredApi.loginUser(info);
 		return res.token;
 	}
 
+	// Login user on form submission and assign token
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -32,6 +35,7 @@ const LoginForm = () => {
 		}
 	};
 
+	// Controls inputs when user makes changes
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((data) => ({

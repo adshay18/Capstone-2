@@ -5,6 +5,7 @@ import { Navbar, Nav, NavItem, Button } from 'reactstrap';
 import UserContext from './UserContext';
 
 function NavBar() {
+	// Grab state and location of user for dynamic navigation
 	const { currUser, logout } = useContext(UserContext);
 	const location = useLocation()
 

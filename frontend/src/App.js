@@ -7,20 +7,25 @@ import Routes from './Routes';
 import { useHistory } from 'react-router-dom';
 
 function App() {
+	// Set state for current user and associated token
 	const [ currUser, setCurrUser ] = useState({});
 	const [ token, setToken ] = useState(localStorage.getItem('User-Token'));
 	const history = useHistory();
 
+	// Login function to set token which is needed to make API requests
 	const login = (token) => {
 		setToken(token);
 		localStorage.setItem('User-Token', token);
 	};
+
+	// Remove token and current user
 	const logout = () => {
 		localStorage.removeItem('User-Token');
 		setCurrUser({});
 		setToken(undefined);
 	};
 	
+	// Register a new user to db and assign token
 	const signup = async (info) => {
 		let res = await BoredApi.registerUser(info);
 		return res.token;

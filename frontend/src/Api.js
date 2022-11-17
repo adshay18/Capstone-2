@@ -10,8 +10,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 
 class BoredApi {
 	static async request(endpoint, data = {}, method = 'get') {
-		console.debug('API Call:', endpoint, data, method);
-
+		// Set request variables
 		const url = `${BASE_URL}/${endpoint}`;
 		const params = method === 'get' ? data : {};
 		const headers = { Authorization: `Bearer ${BoredApi.token}` };
@@ -63,7 +62,6 @@ class BoredApi {
 	}
 
 	// Get user leaderboard
-
 	static async getLeaderboard() {
 		let res = await this.request('leaderboard')
 		return res;
