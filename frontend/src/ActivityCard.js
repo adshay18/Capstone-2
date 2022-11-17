@@ -76,7 +76,7 @@ const ActivityCard = ({id, updateTotal, updateBadgeTotal, tasks}) =>{
                 setMatch(true)
             };
             setLoading(false);
-        }, [username]
+        }, [username, currUser]
     );
 
     // Get details for each task and create ID list to check tasks on screen against current user's list of tasks
@@ -102,7 +102,7 @@ const ActivityCard = ({id, updateTotal, updateBadgeTotal, tasks}) =>{
             };
 
             getText(id);
-        }, [toDoList, currUser]
+        }, [toDoList, currUser, id]
     );
 
         return(
