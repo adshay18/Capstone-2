@@ -13,7 +13,7 @@ const ActivityForm = () => {
     const participants = [1, 2, 3, 4, 5, 6, 7, 8]
 
     // Form submission variables
-    const url = `http://www.boredapi.com/api/activity?type=${formData.type}&participants=${formData.participants}`
+    const url = `https://www.boredapi.com/api/activity?type=${formData.type}&participants=${formData.participants}`
     const [submitted, setSubmitted] = useState(false)
     const [results, setResults] = useState(null)
 
@@ -50,7 +50,7 @@ const ActivityForm = () => {
     const handleClick = async (e) => {
         e.preventDefault();
         try{
-            const res = await axios.get('http://www.boredapi.com/api/activity/');
+            const res = await axios.get('https://www.boredapi.com/api/activity/');
             setResults(res.data);
             setSubmitted(true);
         } catch (err) {
