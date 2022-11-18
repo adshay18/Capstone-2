@@ -22,7 +22,7 @@
 10. `$ heroku config:set PGSSLMODE=no-verify`
 11. `$ heroku open` this should open a window in your default browser with a json on the screen. Likely you will see a 404 error - THIS IS FINE and means the app is running properly
 
-- If you have issues during this process, try creating a separate git repository for the `backend/` directory and run the commands above again. This is due to Heroku requiring an independent `package.json` file in the root of your directory. You may need to login to Heroku and delete the failed build before a second attempt.
+- If you have issues during this process, try creating a separate git repository for the `backend/` directory and run the commands above again. This is due to Heroku requiring an independent `package.json` file in the root of your directory. You may need to login to Heroku and delete the failed build before a second attempt. Another common issue is keeping your `node_modules/` directory out of your commits.  Keep it in a `.gitgnore` file.
 
 - Next change to the `frontend/` directory:
 1. `$ npm install surge` may need to install with the `--g` or `--global` flag depending on permissions
